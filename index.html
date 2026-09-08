@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vengal Rao P — Business & Data Analyst</title>
+<style>
+  :root{
+    --ink:#152238;
+    --ink-soft:#3c4a63;
+    --paper:#EEF0F2;
+    --paper-raised:#FFFFFF;
+    --gold:#C4881F;
+    --gold-deep:#9C6B14;
+    --line:#D5D9DE;
+    --slate:#66707E;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Times New Roman', Times, serif;
+    font-size:17px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'Times New Roman', Times, serif;}
+  a{color:inherit;}
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 40px;
+  }
+
+  /* ===== NAV ===== */
+  .nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(238,240,242,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1080px; margin:0 auto; padding:18px 40px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .nav-mark{font-weight:600; font-size:15px; letter-spacing:0.01em;}
+  .nav-links{display:flex; gap:28px; font-family:'Times New Roman', Times, serif; font-size:13px; color:var(--ink-soft);}
+  .nav-links a{text-decoration:none; border-bottom:1px solid transparent; padding-bottom:2px; transition:border-color .15s ease, color .15s ease;}
+  .nav-links a:hover{border-color:var(--gold); color:var(--ink);}
+  .nav-links a:focus-visible, a:focus-visible{outline:2px solid var(--gold-deep); outline-offset:3px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:96px 0 64px;
+    border-bottom:1px solid var(--line);
+    opacity:0; transform:translateY(8px);
+    animation:rise .7s ease forwards;
+  }
+  @keyframes rise{ to{opacity:1; transform:translateY(0);} }
+  @media (prefers-reduced-motion: reduce){
+    .hero{animation:none; opacity:1; transform:none;}
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.5fr 1fr; gap:48px; align-items:end;
+  }
+  .eyebrow-label{
+    font-family:'Times New Roman', Times, serif; font-size:13px; color:var(--gold-deep);
+    margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow-label::before{content:''; width:22px; height:1px; background:var(--gold-deep); display:inline-block;}
+  h1{
+    font-size:clamp(38px, 5vw, 58px);
+    font-weight:700; letter-spacing:-0.01em; line-height:1.06;
+    color:var(--ink);
+  }
+  .hero-role{
+    font-size:19px; color:var(--ink-soft); margin-top:18px; max-width:46ch; line-height:1.6;
+  }
+  .hero-side{
+    font-size:15px; color:var(--slate); border-left:1px solid var(--line); padding-left:24px;
+  }
+  .hero-side p{margin-bottom:10px;}
+  .hero-side .contact-line{display:flex; gap:8px; font-family:'Times New Roman', Times, serif; font-size:13.5px; color:var(--ink-soft);}
+  .hero-side .contact-line + .contact-line{margin-top:8px;}
+  .hero-cta{
+    margin-top:22px; display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'Times New Roman', Times, serif; font-size:13px; text-decoration:none;
+    padding:10px 16px; border:1px solid var(--ink); color:var(--ink);
+    transition:background .15s ease, color .15s ease;
+  }
+  .btn:hover{background:var(--ink); color:var(--paper-raised);}
+  .btn.primary{background:var(--gold-deep); border-color:var(--gold-deep); color:#fff;}
+  .btn.primary:hover{background:#7f5710; border-color:#7f5710;}
+
+  /* ===== STAT STRIP ===== */
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    border-bottom:1px solid var(--line);
+  }
+  .stat{
+    padding:28px 40px; border-left:1px solid var(--line);
+  }
+  .stat:first-child{border-left:none;}
+  .stat .num{font-size:30px; font-weight:700; color:var(--gold-deep);}
+  .stat .desc{font-size:13px; color:var(--slate); margin-top:6px; line-height:1.45;}
+
+  /* ===== SECTION SHELL ===== */
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .sec-head{
+    display:grid; grid-template-columns:220px 1fr; gap:32px; margin-bottom:36px;
+  }
+  .sec-head h2{
+    font-size:22px; font-weight:600; letter-spacing:-0.01em;
+  }
+  .sec-head .sec-note{color:var(--slate); font-size:15px; max-width:56ch;}
+  .sec-body{display:grid; grid-template-columns:220px 1fr; gap:32px;}
+
+  /* ===== ABOUT ===== */
+  .about-text{font-size:16.5px; color:var(--ink-soft); max-width:68ch; line-height:1.75;}
+  .about-text p + p{margin-top:16px;}
+
+  /* ===== EXPERIENCE ===== */
+  .role{padding-bottom:36px; position:relative;}
+  .role:last-child{padding-bottom:0;}
+  .role-meta{font-family:'Times New Roman', Times, serif; font-size:12.5px; color:var(--slate); line-height:1.7;}
+  .role-title{font-size:18px; font-weight:600; margin-bottom:2px;}
+  .role-org{font-size:14.5px; color:var(--gold-deep); margin-bottom:14px;}
+  .role ul{list-style:none;}
+  .role li{
+    font-size:15px; color:var(--ink-soft); padding-left:16px; position:relative; margin-bottom:9px; line-height:1.55;
+  }
+  .role li::before{content:'—'; position:absolute; left:0; color:var(--slate);}
+  .role li b{color:var(--ink); font-weight:600;}
+
+  /* ===== SKILLS ===== */
+  .skill-group{margin-bottom:22px;}
+  .skill-group:last-child{margin-bottom:0;}
+  .skill-group-label{font-family:'Times New Roman', Times, serif; font-size:12.5px; color:var(--slate); margin-bottom:10px;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:'Times New Roman', Times, serif; font-size:12.5px;
+    border:1px solid var(--line); padding:6px 11px; color:var(--ink-soft);
+    background:var(--paper-raised);
+  }
+
+  /* ===== PROJECTS ===== */
+  .project{
+    border:1px solid var(--line); background:var(--paper-raised);
+    padding:26px 28px; margin-bottom:18px;
+  }
+  .project:last-child{margin-bottom:0;}
+  .project-top{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:14px;}
+  .project-name{font-size:17px; font-weight:600;}
+  .project-tag{font-family:'Times New Roman', Times, serif; font-size:12px; color:var(--gold-deep);}
+  .project-flow{display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:14px;}
+  .flow-part .flow-label{font-family:'Times New Roman', Times, serif; font-size:11px; color:var(--slate); margin-bottom:5px;}
+  .flow-part .flow-text{font-size:14px; color:var(--ink-soft); line-height:1.5;}
+  .project-tools{font-family:'Times New Roman', Times, serif; font-size:12px; color:var(--slate); border-top:1px solid var(--line); padding-top:12px;}
+
+  /* ===== CERTS ===== */
+  .cert-list{display:grid; gap:12px;}
+  .cert{display:flex; justify-content:space-between; gap:16px; font-size:14.5px; padding:12px 0; border-bottom:1px solid var(--line);}
+  .cert:last-child{border-bottom:none;}
+  .cert-name{color:var(--ink);}
+  .cert-org{font-family:'Times New Roman', Times, serif; font-size:12.5px; color:var(--slate); white-space:nowrap;}
+
+  /* ===== FOOTER ===== */
+  footer{padding:56px 0 64px;}
+  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:32px; align-items:start;}
+  footer h2{font-size:26px; font-weight:700; margin-bottom:14px; max-width:16ch; line-height:1.2;}
+  footer p{color:var(--ink-soft); max-width:44ch; margin-bottom:22px;}
+  .footer-contacts{font-family:'Times New Roman', Times, serif; font-size:13.5px; color:var(--ink-soft); line-height:2.1;}
+  .footer-contacts a{text-decoration:none; border-bottom:1px solid var(--line);}
+  .footer-bottom{margin-top:48px; padding-top:20px; border-top:1px solid var(--line); font-family:'Times New Roman', Times, serif; font-size:12px; color:var(--slate); display:flex; justify-content:space-between;}
+
+  @media (max-width:760px){
+    .wrap{padding:0 22px;}
+    .nav-inner{padding:16px 22px;}
+    .nav-links{gap:16px;}
+    .hero{padding:64px 0 40px;}
+    .hero-grid{grid-template-columns:1fr; gap:24px;}
+    .hero-side{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:18px;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .stat{padding:20px 22px;}
+    .stat:nth-child(3){border-left:none;}
+    .sec-head, .sec-body{grid-template-columns:1fr;}
+    .project-flow{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark">Vengal Rao P</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero" id="top">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow-label">Business &amp; Data Analyst · Bengaluru</div>
+        <h1>I turn dealership data into decisions.</h1>
+        <p class="hero-role">SQL, ETL pipelines, RPA, and Power BI for automotive CRM systems — plus the client-facing side: onboarding, demos, and leading the team that ships it.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="mailto:vengalraooffical@gmail.com">Email me</a>
+          <a class="btn" href="https://www.linkedin.com/in/vengalraop/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="tel:+919791154159">Call</a>
+        </div>
+      </div>
+      <div class="hero-side">
+        <p>Currently: Business Analyst at WyzMindz Solutions, working across CRM implementation for automotive dealer groups.</p>
+        <div class="contact-line"><span>◦</span><span>vengalraooffical@gmail.com</span></div>
+        <div class="contact-line"><span>◦</span><span>+91 97911 54159</span></div>
+        <div class="contact-line"><span>◦</span><span>Bengaluru, India</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Key results">
+    <div class="stat">
+      <div class="num mono">30%</div>
+      <div class="desc">Improvement in data accuracy through ETL workflow redesign and SQL validation</div>
+    </div>
+    <div class="stat">
+      <div class="num mono">40%</div>
+      <div class="desc">Cut in manual reporting time after moving teams onto Power BI dashboards</div>
+    </div>
+    <div class="stat">
+      <div class="num mono">35%</div>
+      <div class="desc">Faster reporting after SQL query optimization across core CRM tables</div>
+    </div>
+    <div class="stat">
+      <div class="num mono">3–4</div>
+      <div class="desc">Analysts led across data validation, dashboards, and CRM configuration</div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="sec-body">
+      <div class="skill-group-label">§ About</div>
+      <div class="about-text">
+        <p>I'm a Business &amp; Data Analyst working at the intersection of CRM systems, data engineering, and client delivery for automotive dealer groups — Ramani Mahindra, Kun Capital, Kun Hyundai, and Advaith Hyundai among them.</p>
+        <p>Day to day, that means writing the SQL that validates a client's data, building the Power BI dashboard their operations team checks every morning, and standing in front of that same client to walk them through it. I also built RPA bots that pull service history and contact records straight out of dealer web portals, so nobody on the team is copying that data by hand anymore.</p>
+        <p>I lead a small team of 3–4 analysts, own onboarding for new dealer clients, and I'm currently building out AZ-900 knowledge to go deeper on the Azure Data Factory side of our ETL work.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <h2>Experience</h2>
+      <div class="sec-note">Two roles, one thread: getting messy dealership data into a shape people can act on.</div>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <div>
+        <div class="role">
+          <div class="role-meta">JAN 2025 — PRESENT · BENGALURU</div>
+          <div class="role-title">Business Analyst — Data, CRM &amp; RPA Implementation</div>
+          <div class="role-org">WyzMindz Solutions</div>
+          <ul>
+            <li><b>Team leadership</b> — run a team of 3–4 analysts across data validation, dashboard builds, and CRM configuration for automotive clients.</li>
+            <li><b>Client onboarding &amp; demos</b> — own onboarding for new dealer accounts end to end, and deliver product demos that turn stakeholder requirements into CRM configuration.</li>
+            <li><b>RPA</b> — built bots that extract service history and contact records from Hyundai and Maruti dealer portals, removing manual data entry from the workflow.</li>
+            <li><b>CRM product work</b> — develop customized reporting inside the CRM and feed client feedback into new feature builds.</li>
+            <li><b>Data quality</b> — 30% gain in data accuracy via ETL redesign and validation scripts; 20% fewer errors from reconciliation checks.</li>
+            <li><b>Performance</b> — 35% faster reporting from SQL optimization; 40% less manual reporting after Power BI rollout.</li>
+            <li><b>UAT</b> — led UAT cycles that cut post-release issues by 40%.</li>
+          </ul>
+        </div>
+        <div class="role">
+          <div class="role-meta">AUG 2024 — JAN 2025 · CHENNAI</div>
+          <div class="role-title">Trainee Data Analyst</div>
+          <div class="role-org">DataPrompt International</div>
+          <ul>
+            <li>Improved data quality by 20% through structured cleaning and validation.</li>
+            <li>Cut analysis turnaround by 25% by automating repetitive steps in Excel.</li>
+            <li>Ran SQL-based analysis to support client reporting requests.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <h2>Skills</h2>
+      <div class="sec-note">Grouped by what I actually use them for, not alphabetized.</div>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <div>
+        <div class="skill-group">
+          <div class="skill-group-label">ANALYTICS &amp; BI</div>
+          <div class="chips">
+            <span class="chip">SQL</span><span class="chip">Power BI</span><span class="chip">Excel</span><span class="chip">Power Query</span><span class="chip">Data Cleaning</span><span class="chip">KPI Reporting</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">ETL &amp; AUTOMATION</div>
+          <div class="chips">
+            <span class="chip">ETL Pipelines</span><span class="chip">Data Validation</span><span class="chip">RPA</span><span class="chip">Azure Data Factory</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">DATABASE</div>
+          <div class="chips">
+            <span class="chip">MySQL</span><span class="chip">Query Optimization</span><span class="chip">Joins</span><span class="chip">Stored Procedures</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">BUSINESS ANALYSIS</div>
+          <div class="chips">
+            <span class="chip">Requirement Gathering</span><span class="chip">UAT</span><span class="chip">Stakeholder Management</span><span class="chip">BRD Creation</span><span class="chip">User Stories</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">CLIENT &amp; TEAM</div>
+          <div class="chips">
+            <span class="chip">Team Leadership</span><span class="chip">Client Onboarding</span><span class="chip">Product Demos</span><span class="chip">CRM Configuration</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">AI-ASSISTED WORKFLOW</div>
+          <div class="chips">
+            <span class="chip">ChatGPT</span><span class="chip">Claude</span><span class="chip">Cursor</span><span class="chip">GitHub Copilot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head">
+      <h2>Projects</h2>
+      <div class="sec-note">Client work from the last year and a half, in problem → action → result form.</div>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <div>
+
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name">Ramani Mahindra — CRM implementation</div>
+            <div class="project-tag mono">10K+ records / month</div>
+          </div>
+          <div class="project-flow">
+            <div class="flow-part"><div class="flow-label mono">PROBLEM</div><div class="flow-text">Inconsistent monthly data across dealership branches, no renewal visibility.</div></div>
+            <div class="flow-part"><div class="flow-label mono">ACTION</div><div class="flow-text">Built SQL validation rules and dashboards tracking renewal status in real time.</div></div>
+            <div class="flow-part"><div class="flow-label mono">RESULT</div><div class="flow-text">30% better data consistency, 25% fewer discrepancies.</div></div>
+          </div>
+          <div class="project-tools">Tools — ChatGPT for documentation · Claude for SQL optimization · Cursor for build</div>
+        </div>
+
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name">Kun Capital — Reporting optimization</div>
+            <div class="project-tag mono">40% less manual work</div>
+          </div>
+          <div class="project-flow">
+            <div class="flow-part"><div class="flow-label mono">PROBLEM</div><div class="flow-text">Reports were compiled by hand every cycle, slow and error-prone.</div></div>
+            <div class="flow-part"><div class="flow-label mono">ACTION</div><div class="flow-text">Automated the reporting pipeline and redesigned underlying data models.</div></div>
+            <div class="flow-part"><div class="flow-label mono">RESULT</div><div class="flow-text">40% reduction in manual reporting, 30% faster SQL.</div></div>
+          </div>
+          <div class="project-tools">Tools — ChatGPT · Claude · Cursor for analytics and development</div>
+        </div>
+
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name">Kun Hyundai &amp; Advaith Hyundai — Workflow optimization</div>
+            <div class="project-tag mono">100% UAT coverage</div>
+          </div>
+          <div class="project-flow">
+            <div class="flow-part"><div class="flow-label mono">PROBLEM</div><div class="flow-text">Existing dealer workflows were slow, with releases prone to post-deployment issues.</div></div>
+            <div class="flow-part"><div class="flow-label mono">ACTION</div><div class="flow-text">Redesigned core workflows and ran full UAT validation coverage on every release.</div></div>
+            <div class="flow-part"><div class="flow-label mono">RESULT</div><div class="flow-text">20% efficiency gain, 30% fewer deployment issues.</div></div>
+          </div>
+          <div class="project-tools">Tools — ChatGPT for test cases and documentation</div>
+        </div>
+
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name">Dealer Portal RPA — Service history &amp; contact extraction</div>
+            <div class="project-tag mono">Hyundai · Maruti</div>
+          </div>
+          <div class="project-flow">
+            <div class="flow-part"><div class="flow-label mono">PROBLEM</div><div class="flow-text">Service history and customer contact data lived only inside Hyundai and Maruti dealer web portals, entered by hand.</div></div>
+            <div class="flow-part"><div class="flow-label mono">ACTION</div><div class="flow-text">Designed and deployed RPA bots that log in, extract the records, and feed them directly into CRM.</div></div>
+            <div class="flow-part"><div class="flow-label mono">RESULT</div><div class="flow-text">Manual data entry removed entirely; records now sync automatically into CRM.</div></div>
+          </div>
+          <div class="project-tools">Tools — RPA bots · CRM API integration</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="sec-head">
+      <h2>Certifications &amp; education</h2>
+      <div class="sec-note">B.E. Mechanical Engineering, St. Joseph's College of Engineering — CGPA 8.03</div>
+    </div>
+    <div class="sec-body">
+      <div></div>
+      <div class="cert-list">
+        <div class="cert"><span class="cert-name">Master Program in Data Science</span><span class="cert-org mono">LIVEWIRE</span></div>
+        <div class="cert"><span class="cert-name">Data Analytics &amp; Visualization Job Simulation</span><span class="cert-org mono">ACCENTURE (FORAGE)</span></div>
+        <div class="cert"><span class="cert-name">Data Visualisation: Empowering Business with Effective Insights</span><span class="cert-org mono">TATA GROUP (FORAGE)</span></div>
+        <div class="cert"><span class="cert-name">Microsoft Azure Fundamentals (AZ-900)</span><span class="cert-org mono">IN PROGRESS</span></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>Let's talk about your data.</h2>
+        <p>Open to Business Analyst, Data Analyst, and Data Engineer roles in Bengaluru, Chennai, or Hyderabad — remote or hybrid. Available to join in 3 months.</p>
+        <a class="btn primary" href="mailto:vengalraooffical@gmail.com">vengalraooffical@gmail.com</a>
+      </div>
+      <div class="footer-contacts">
+        <div>Phone — <a href="tel:+919791154159">+91 97911 54159</a></div>
+        <div>LinkedIn — <a href="https://www.linkedin.com/in/vengalraop/" target="_blank" rel="noopener">linkedin.com/in/vengalraop</a></div>
+        <div>Location — Bengaluru, India</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Vengal Rao P</span>
+      <span>Business &amp; Data Analyst</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

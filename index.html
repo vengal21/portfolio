@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vengal Rao P — Business Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/*
+  COLOR SYSTEM — based on 60-30-10 + 4 functional data color grades
+  ─────────────────────────────────────────────────────────────────
+  60% DOMINANT SURFACE:  #F8F9FA (light) / #1A2332 (dark hero)
+  30% STRUCTURE & TYPE:  #212529 charcoal — NOT pure black
+  10% ACTION HUE:        #4361A8 slate-blue — ONLY for links, buttons, CTAs
+
+  Sequential grade  → metric bars: #C5D3F0 → #1A3272 (single blue hue, light→dark)
+  Diverging grade   → impact badges: neutral gray midpoint, #4D8B65 forest green
+  Qualitative grade → skill categories: 5 muted hues, equal visual weight
+  Semantic grade    → project status: #4D8B65 sage green, #C8860A amber, #C94A4A crimson
+*/
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* ── 60% dominant surfaces ── */
+  --surface-light: #F8F9FA;
+  --surface-light2:#EEF1F5;
+  --surface-dark:  #1A2332;
+  --surface-dark2: #0F1923;
+
+  /* ── 30% structure & typography ── */
+  --charcoal:  #212529;   /* main dark text — NOT pure black */
+  --charcoal2: #343A40;   /* secondary text, borders */
+  --charcoal3: #6C757D;   /* tertiary / muted */
+  --charcoal4: #ADB5BD;   /* very muted labels */
+  --border-light: #DEE2E8;
+  --border-dark:  rgba(255,255,255,.08);
+
+  /* ── 10% action hue — used ONLY for interactive elements ── */
+  --action:    #4361A8;   /* slate-blue — buttons, links, CTAs */
+  --action2:   #364F8E;   /* hover state */
+  --action-lo: rgba(67,97,168,.1);
+
+  /* ── Sequential color grade (single hue, light→dark) ── */
+  --seq-1: #C5D3F0;   /* lightest — lowest value */
+  --seq-2: #8FA9E0;
+  --seq-3: #5A7FD0;
+  --seq-4: #4361A8;
+  --seq-5: #2C4A8A;
+  --seq-6: #1A3272;   /* darkest — highest value */
+
+  /* ── Diverging grade (negative → neutral → positive) ── */
+  --div-neg:  #C94A4A;   /* burnt crimson — below target */
+  --div-mid:  #868E96;   /* neutral gray midpoint */
+  --div-pos:  #4D8B65;   /* forest/sage green — above target */
+
+  /* ── Qualitative grade (5 muted hues, equal visual weight) ── */
+  --cat-1: #4361A8;   /* slate-blue   — Analytics & BI */
+  --cat-2: #2E7D6E;   /* deep teal    — ETL & Automation */
+  --cat-3: #7B5EA7;   /* soft plum    — Programming */
+  --cat-4: #8B6914;   /* warm amber   — Business Analysis */
+  --cat-5: #2B6587;   /* steel-blue   — Methods & Process */
+
+  --cat-1-bg: rgba(67,97,168,.09);
+  --cat-2-bg: rgba(46,125,110,.09);
+  --cat-3-bg: rgba(123,94,167,.09);
+  --cat-4-bg: rgba(139,105,20,.09);
+  --cat-5-bg: rgba(43,101,135,.09);
+
+  --cat-1-bd: rgba(67,97,168,.22);
+  --cat-2-bd: rgba(46,125,110,.22);
+  --cat-3-bd: rgba(123,94,167,.22);
+  --cat-4-bd: rgba(139,105,20,.22);
+  --cat-5-bd: rgba(43,101,135,.22);
+
+  /* ── Semantic / Alert grade ── */
+  --sem-green:     #4D8B65;
+  --sem-green-bg:  rgba(77,139,101,.08);
+  --sem-green-bd:  rgba(77,139,101,.22);
+  --sem-amber:     #C8860A;
+  --sem-amber-bg:  rgba(200,134,10,.08);
+  --sem-amber-bd:  rgba(200,134,10,.22);
+  --sem-red:       #C94A4A;
+  --sem-red-bg:    rgba(201,74,74,.08);
+  --sem-red-bd:    rgba(201,74,74,.22);
+
+  /* ── Type scale ── */
+  --fs-xl:  clamp(2.2rem,5vw,4.2rem);
+  --fs-lg:  clamp(1.4rem,2.6vw,2.1rem);
+  --fs-md:  clamp(0.95rem,1.6vw,1.15rem);
+  --fs-base:1rem;
+  --fs-sm:  0.875rem;
+  --fs-xs:  0.75rem;
+  --radius: 10px;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:var(--fs-base);
+  background:var(--surface-dark2);
+  color:var(--surface-light);
+  line-height:1.65;overflow-x:hidden
+}
+a{color:inherit;text-decoration:none}
+
+/* ── Subtle grid — de-saturated, low-contrast (Step 2: background noise) ── */
+.grid-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(67,97,168,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(67,97,168,.05) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.45) 0%,transparent 100%)
+}
+
+/* ══════════════════ NAV ════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 48px;
+  background:rgba(15,25,35,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-dark)
+}
+.nav-logo{
+  font-family:'DM Sans',sans-serif;
+  font-weight:700;font-size:1.05rem;letter-spacing:-.01em;
+  color:var(--surface-light)
+}
+/* 10% action hue — nav logo accent */
+.nav-logo span{color:var(--action)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  font-size:var(--fs-sm);font-weight:500;
+  color:var(--charcoal4);transition:color .2s
+}
+.nav-links a:hover{color:var(--surface-light)}
+/* 10% action hue — the ONLY button in nav */
+.nav-resume{
+  padding:7px 18px;border-radius:7px;
+  background:var(--action);color:#fff;
+  font-size:var(--fs-sm);font-weight:600;
+  transition:background .2s,transform .15s;
+  display:flex;align-items:center;gap:6px
+}
+.nav-resume:hover{background:var(--action2);transform:translateY(-1px)}
+
+/* ══════════════════ HERO ═══════════════════════════════════ */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 48px 80px;overflow:hidden;
+  background:var(--surface-dark)
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 13px;border-radius:99px;
+  border:1px solid rgba(67,97,168,.3);
+  background:rgba(67,97,168,.07);
+  font-size:var(--fs-xs);font-weight:500;
+  color:var(--seq-2);letter-spacing:.03em;
+  margin-bottom:26px;width:fit-content
+}
+/* Semantic green — "open to work" is a positive status */
+.hero-tag-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--sem-green);animation:blink 2.2s infinite
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.hero h1{
+  font-family:'DM Sans',sans-serif;
+  font-size:var(--fs-xl);font-weight:700;
+  line-height:1.1;letter-spacing:-.03em;
+  /* 30% charcoal on white would be ink; here inverted = surface-light */
+  color:var(--surface-light);
+  max-width:800px;margin-bottom:22px
+}
+.hero-sub{
+  font-size:var(--fs-md);font-weight:300;
+  color:var(--charcoal4);max-width:540px;
+  line-height:1.72;margin-bottom:40px
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+/* 10% action hue — primary CTA */
+.btn-primary{
+  padding:11px 24px;border-radius:8px;
+  background:var(--action);color:#fff;
+  font-size:var(--fs-sm);font-weight:600;
+  border:none;cursor:pointer;
+  transition:background .2s,transform .15s;
+  display:inline-flex;align-items:center;gap:7px
+}
+.btn-primary:hover{background:var(--action2);transform:translateY(-2px)}
+.btn-outline{
+  padding:11px 24px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.15);
+  color:var(--surface-light);
+  font-size:var(--fs-sm);font-weight:500;background:transparent;
+  transition:border-color .2s,background .2s;cursor:pointer
+}
+.btn-outline:hover{
+  border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.05)
+}
+.hero-brands{
+  display:flex;align-items:center;gap:9px;
+  margin-top:52px;flex-wrap:wrap
+}
+.hero-brands-label{
+  font-size:var(--fs-xs);color:var(--charcoal3);
+  font-weight:500;letter-spacing:.03em;white-space:nowrap
+}
+/* Brand chips — de-saturated, background noise (Step 2) */
+.brand-chip{
+  padding:4px 12px;border-radius:99px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  font-size:var(--fs-xs);color:var(--charcoal4)
+}
+
+/* ══════════════════ METRICS (Sequential Grade) ══════════════
+   Single blue hue scaling from lightest (35%) → darkest (95%)
+   Maps continuous performance data — sequential grade #1
+═══════════════════════════════════════════════════════════════ */
+.metrics{
+  background:var(--surface-dark2);
+  border-top:1px solid var(--border-dark);
+  border-bottom:1px solid var(--border-dark);
+  padding:56px 48px;
+  display:grid;grid-template-columns:repeat(4,1fr)
+}
+.metric{
+  padding:0 36px;
+  border-right:1px solid var(--border-dark)
+}
+.metric:first-child{padding-left:0}
+.metric:last-child{border-right:none}
+
+/* Sequential bar behind number */
+.metric-bar-wrap{
+  height:4px;background:var(--charcoal2);
+  border-radius:99px;margin-bottom:14px;overflow:hidden
+}
+.metric-bar{
+  height:100%;border-radius:99px;
+  /* Each bar gets inline style for its sequential shade */
+}
+
+.metric-num{
+  font-family:'DM Sans',sans-serif;
+  font-size:clamp(1.9rem,3.8vw,3rem);
+  font-weight:700;color:var(--surface-light);
+  line-height:1;margin-bottom:7px
+}
+/* Sequential shade on the number itself — higher = darker blue */
+.metric-num.seq-95{color:var(--seq-6)}
+.metric-num.seq-80{color:var(--seq-5)}
+.metric-num.seq-40{color:var(--seq-4)}
+.metric-num.seq-35{color:var(--seq-3)}
+
+.metric-label{
+  font-size:var(--fs-sm);color:var(--charcoal3);
+  font-weight:400;line-height:1.45;max-width:170px
+}
+
+/* ══════════════════ SECTION BASE ═══════════════════════════ */
+.section{padding:88px 48px}
+/* 60% dominant light surface */
+.section.light{background:var(--surface-light);color:var(--charcoal)}
+.section.dark{background:var(--surface-dark)}
+
+/* 10% action hue — section eyebrow label only */
+.section-eyebrow{
+  font-size:var(--fs-xs);font-weight:600;
+  color:var(--action);letter-spacing:.07em;
+  margin-bottom:10px;text-transform:uppercase
+}
+.section.light .section-eyebrow{color:var(--action2)}
+.section-title{
+  font-family:'DM Sans',sans-serif;
+  font-size:var(--fs-lg);font-weight:700;
+  letter-spacing:-.02em;line-height:1.15;
+  margin-bottom:48px;max-width:540px;
+  color:var(--surface-light)
+}
+.section.light .section-title{color:var(--charcoal)}
+
+/* ══════════════════ PROJECTS ═══════════════════════════════ */
+.projects-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px
+}
+.project-card{
+  /* 60% surface with de-saturated border (Step 2) */
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:var(--radius);padding:28px 24px;
+  transition:border-color .25s,transform .22s
+}
+.project-card:hover{
+  border-color:rgba(67,97,168,.38);transform:translateY(-3px)
+}
+.project-icon{
+  width:40px;height:40px;border-radius:8px;
+  background:var(--action-lo);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;margin-bottom:16px
+}
+.project-title{
+  font-family:'DM Sans',sans-serif;
+  font-size:1rem;font-weight:600;
+  color:var(--surface-light);margin-bottom:8px
+}
+.project-desc{
+  font-size:var(--fs-sm);color:var(--charcoal4);
+  line-height:1.65;margin-bottom:14px
+}
+
+/* ──────────────────────────────────────────────────────────
+   SEMANTIC / ALERT GRADE — project impact badges
+   Diverging scale: positive outcomes = forest green #4D8B65
+   Neutral/process = amber #C8860A (in-progress status)
+   No neon, no harsh colors — sophisticated corporate tones
+────────────────────────────────────────────────────────── */
+.impact-green{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 11px;border-radius:6px;
+  background:var(--sem-green-bg);
+  border:1px solid var(--sem-green-bd);
+  font-size:11px;font-weight:600;
+  color:var(--sem-green);margin-bottom:14px
+}
+.impact-amber{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 11px;border-radius:6px;
+  background:var(--sem-amber-bg);
+  border:1px solid var(--sem-amber-bd);
+  font-size:11px;font-weight:600;
+  color:var(--sem-amber);margin-bottom:14px
+}
+.project-stack{display:flex;gap:5px;flex-wrap:wrap}
+/* De-saturated stack tags — background noise (Step 2) */
+.stack-tag{
+  padding:2px 8px;border-radius:4px;font-size:10px;font-weight:500;
+  background:rgba(255,255,255,.05);color:var(--charcoal4)
+}
+
+/* ══════════════════ TIMELINE ═══════════════════════════════ */
+.timeline{max-width:840px}
+.timeline-item{
+  display:grid;grid-template-columns:185px 1fr;
+  gap:0 36px;margin-bottom:52px
+}
+.timeline-item:last-child{margin-bottom:0}
+.timeline-date{
+  font-size:var(--fs-xs);color:var(--charcoal3);
+  font-weight:500;line-height:1.4;margin-bottom:5px;padding-top:4px
+}
+/* 10% action hue — company name (interactive context label) */
+.timeline-company{
+  font-size:var(--fs-sm);font-weight:600;color:var(--action)
+}
+/* De-saturated border (Step 2 — structural element fades back) */
+.timeline-right{
+  border-left:1px solid var(--border-light);padding-left:36px
+}
+.timeline-role{
+  font-family:'DM Sans',sans-serif;
+  font-size:1.08rem;font-weight:600;
+  color:var(--charcoal);margin-bottom:9px
+}
+.timeline-desc{
+  font-size:var(--fs-sm);
+  /* 30% structure color for body text */
+  color:var(--charcoal2);line-height:1.7;margin-bottom:15px
+}
+.timeline-tags{display:flex;gap:6px;flex-wrap:wrap}
+/* Tags match qualitative cat-1 (analytics/BA context) */
+.tag{
+  padding:3px 9px;border-radius:5px;font-size:11px;font-weight:500;
+  background:var(--cat-1-bg);color:var(--cat-1);
+  border:1px solid var(--cat-1-bd)
+}
+
+/* ══════════════════ SKILLS (Qualitative Grade) ══════════════
+   5 distinct muted hues, equal lightness + saturation,
+   no single color accidentally looks "more important"
+   Max 5 categories — no rainbow chaos (Step 3 mapping)
+═══════════════════════════════════════════════════════════════ */
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.skill-group{margin-bottom:30px}
+.skill-group-title{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.9rem;font-weight:600;
+  color:var(--charcoal);margin-bottom:11px;
+  display:flex;align-items:center;gap:10px
+}
+/* De-saturated rule line (Step 2 — background noise fades) */
+.skill-group-title::after{
+  content:'';flex:1;height:1px;background:var(--border-light)
+}
+.skill-pills{display:flex;gap:6px;flex-wrap:wrap}
+
+/* Qualitative cat-1: slate-blue — Analytics & BI */
+.pill-cat1{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:500;background:var(--cat-1-bg);
+  color:var(--cat-1);border:1px solid var(--cat-1-bd)
+}
+/* Qualitative cat-2: deep teal — ETL & Automation */
+.pill-cat2{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:500;background:var(--cat-2-bg);
+  color:var(--cat-2);border:1px solid var(--cat-2-bd)
+}
+/* Qualitative cat-3: soft plum — Programming */
+.pill-cat3{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:500;background:var(--cat-3-bg);
+  color:var(--cat-3);border:1px solid var(--cat-3-bd)
+}
+/* Qualitative cat-4: warm amber — Business Analysis */
+.pill-cat4{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:500;background:var(--cat-4-bg);
+  color:var(--cat-4);border:1px solid var(--cat-4-bd)
+}
+/* Qualitative cat-5: steel-blue — Methods & Process */
+.pill-cat5{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:500;background:var(--cat-5-bg);
+  color:var(--cat-5);border:1px solid var(--cat-5-bd)
+}
+/* Neutral pill — AI Tools (no category color needed) */
+.pill-neutral{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:400;
+  background:var(--surface-light2);
+  color:var(--charcoal2);
+  border:1px solid var(--border-light)
+}
+
+/* ══════════════════ CLIENTS ════════════════════════════════ */
+.clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.client-card{
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--border-dark);
+  border-radius:var(--radius);padding:22px 18px;text-align:center;
+  transition:border-color .2s
+}
+.client-card:hover{border-color:rgba(67,97,168,.28)}
+.client-logo{
+  font-family:'DM Sans',sans-serif;
+  font-size:1.05rem;font-weight:700;
+  color:var(--surface-light);margin-bottom:5px
+}
+.client-sub{
+  font-size:11px;color:var(--charcoal3);
+  font-weight:400;line-height:1.5
+}
+
+/* ══════════════════ CONTACT ════════════════════════════════ */
+.contact-wrap{max-width:580px;margin:0 auto;text-align:center}
+.contact-desc{
+  font-size:var(--fs-sm);color:var(--charcoal4);
+  line-height:1.72;max-width:420px;margin:0 auto 32px
+}
+.contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.contact-link{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:8px;
+  border:1px solid var(--border-dark);
+  font-size:var(--fs-sm);font-weight:500;color:var(--charcoal4);
+  transition:border-color .2s,color .2s
+}
+/* 10% action hue — hover reveals action color */
+.contact-link:hover{border-color:var(--action);color:var(--surface-light)}
+
+/* ══════════════════ FOOTER ═════════════════════════════════ */
+footer{
+  padding:22px 48px;
+  border-top:1px solid var(--border-dark);
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:var(--fs-xs);color:var(--charcoal3)
+}
+
+/* ══════════════════ RESPONSIVE ═════════════════════════════ */
+@media(max-width:900px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .hero,.section{padding-left:20px;padding-right:20px}
+  .metrics{grid-template-columns:repeat(2,1fr);padding:36px 20px;gap:28px}
+  .metric{border-right:none;padding:0;
+    border-bottom:1px solid var(--border-dark);padding-bottom:22px}
+  .metric:nth-child(odd){
+    border-right:1px solid var(--border-dark);padding-right:16px}
+  .metric:nth-last-child(-n+2){border-bottom:none}
+  .projects-grid{grid-template-columns:1fr}
+  .timeline-item{grid-template-columns:1fr;gap:8px}
+  .timeline-right{
+    border-left:none;padding-left:0;
+    border-top:1px solid var(--border-light);padding-top:14px}
+  .clients-grid{grid-template-columns:repeat(2,1fr)}
+  .skills-layout{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:6px;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ════════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">Vengal<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div>
+    <a href="https://drive.google.com/file/d/1PnHbERQBaswtddWUk3Nbbpv6fW2i59Af/view?usp=sharing"
+       target="_blank" class="nav-resume">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+      </svg>
+      Download Resume
+    </a>
+  </div>
+</nav>
+
+<!-- ══ HERO ═══════════════════════════════════════════════════════ -->
+<section class="hero" id="about">
+  <div class="grid-bg"></div>
+  <div class="hero-tag">
+    <span class="hero-tag-dot"></span>
+    Open to BA · DA · BI Analyst roles — Chennai, Bengaluru, Hyderabad, Remote
+  </div>
+  <h1>
+    Business Analyst with 1.6 years<br>
+    delivering measurable impact in<br>
+    CRM, RPA &amp; data analytics
+  </h1>
+  <p class="hero-sub">
+    I build automation pipelines, forecasting models, and BI dashboards
+    for automotive dealer clients across India — translating business
+    requirements into technical outcomes that teams can act on.
+  </p>
+  <div class="hero-actions">
+    <a href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view"
+       target="_blank" class="btn-primary">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+      </svg>
+      Download Resume
+    </a>
+    <a href="https://www.linkedin.com/in/vengalraop"
+       target="_blank" class="btn-outline">View LinkedIn</a>
+  </div>
+  <div class="hero-brands">
+    <span class="hero-brands-label">Worked with</span>
+    <span class="brand-chip">Hyundai</span>
+    <span class="brand-chip">Maruti Suzuki</span>
+    <span class="brand-chip">Mahindra</span>
+    <span class="brand-chip">Tata Motors</span>
+    <span class="brand-chip">KIA</span>
+    <span class="brand-chip">Volkswagen</span>
+    <span class="brand-chip">Skoda</span>
+  </div>
+</section>
+
+<!-- ══ METRICS — Sequential Color Grade ══════════════════════════
+     Single blue hue. Higher performance = deeper sequential shade.
+     95% → seq-6 darkest. 35% → seq-3 lightest.
+     Bar width = pre-attentive attribute isolation (Step 4).
+════════════════════════════════════════════════════════════════ -->
+<div class="metrics" id="metrics">
+  <div class="metric">
+    <div class="metric-bar-wrap">
+      <div class="metric-bar"
+           style="width:95%;background:var(--seq-6)"></div>
+    </div>
+    <div class="metric-num seq-95">
+      <span class="count" data-target="95">0</span>%
+    </div>
+    <div class="metric-label">
+      Forecast accuracy — improved from 50% for service &amp;
+      insurance prediction
+    </div>
+  </div>
+  <div class="metric">
+    <div class="metric-bar-wrap">
+      <div class="metric-bar"
+           style="width:80%;background:var(--seq-5)"></div>
+    </div>
+    <div class="metric-num seq-80">
+      <span class="count" data-target="80">0</span>%
+    </div>
+    <div class="metric-label">
+      Reduction in manual forecasting effort through automation
+    </div>
+  </div>
+  <div class="metric">
+    <div class="metric-bar-wrap">
+      <div class="metric-bar"
+           style="width:40%;background:var(--seq-4)"></div>
+    </div>
+    <div class="metric-num seq-40">
+      <span class="count" data-target="40">0</span>%
+    </div>
+    <div class="metric-label">
+      Less manual reporting via Power BI dashboard automation
+    </div>
+  </div>
+  <div class="metric">
+    <div class="metric-bar-wrap">
+      <div class="metric-bar"
+           style="width:35%;background:var(--seq-3)"></div>
+    </div>
+    <div class="metric-num seq-35">
+      <span class="count" data-target="35">0</span>%
+    </div>
+    <div class="metric-label">
+      Faster SQL query performance after optimization
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROJECTS — Semantic / Alert Grade on badges ═══════════════
+     Positive outcomes → forest green #4D8B65
+     Process / coverage → amber #C8860A
+     No neon. Sophisticated corporate tones only.
+════════════════════════════════════════════════════════════════ -->
+<section class="section dark" id="projects">
+  <div class="section-eyebrow">Selected Work</div>
+  <div class="section-title">Projects that delivered measurable impact</div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-icon">🤖</div>
+      <div class="project-title">RPA Data Extraction Pipeline</div>
+      <div class="project-desc">
+        Built end-to-end RPA workflows to automatically extract service
+        history records and customer contact data from OEM automotive
+        dealer portals. Integrated directly into AutoSherpa CRM,
+        eliminating all manual data entry.
+      </div>
+      <!-- Semantic green — positive outcome confirmed -->
+      <div class="impact-green">&#10003; 50% reduction in data collection time</div>
+      <div class="project-stack">
+        <span class="stack-tag">RPA</span>
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">MySQL</span>
+        <span class="stack-tag">ETL</span>
+        <span class="stack-tag">CRM Integration</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📈</div>
+      <div class="project-title">Service &amp; Insurance Forecasting Model</div>
+      <div class="project-desc">
+        Developed predictive forecasting solutions for automotive dealer
+        clients. Rebuilt the validation framework and business rules from
+        scratch using SQL-based analysis and dealer-specific data patterns.
+      </div>
+      <!-- Semantic green — highest positive outcome -->
+      <div class="impact-green">&#10003; 50% → 95% accuracy · 80% less manual effort</div>
+      <div class="project-stack">
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">MySQL</span>
+        <span class="stack-tag">Data Modeling</span>
+        <span class="stack-tag">Business Rules</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📊</div>
+      <div class="project-title">Mahindra Dealer — CRM Implementation</div>
+      <div class="project-desc">
+        Full CRM implementation for a major Mahindra dealership client.
+        Processed 10,000+ records per month. Built renewal tracking
+        dashboards and reduced data discrepancies by 25% using
+        SQL-based validation scripts.
+      </div>
+      <div class="impact-green">&#10003; 30% improvement in data consistency</div>
+      <div class="project-stack">
+        <span class="stack-tag">Power BI</span>
+        <span class="stack-tag">MySQL</span>
+        <span class="stack-tag">CRM</span>
+        <span class="stack-tag">BRD</span>
+        <span class="stack-tag">UAT</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">⚡</div>
+      <div class="project-title">Hyundai Dealer — Workflow Optimization + RPA</div>
+      <div class="project-desc">
+        Led workflow optimization and RPA deployment for multiple Hyundai
+        dealership clients. Achieved 100% UAT validation coverage using
+        SQL. Reduced deployment issues by 30% through rigorous
+        pre-release testing.
+      </div>
+      <!-- Semantic amber — process/coverage metric, not a % improvement -->
+      <div class="impact-amber">&#9711; 100% UAT coverage · 20% efficiency gain</div>
+      <div class="project-stack">
+        <span class="stack-tag">RPA</span>
+        <span class="stack-tag">UAT</span>
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">n8n</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📉</div>
+      <div class="project-title">Dealer Group — Reporting Optimization</div>
+      <div class="project-desc">
+        Optimized end-to-end reporting pipeline for a large automotive
+        dealer group. Reduced manual reporting by 40% via automation.
+        Improved SQL performance by 30% and redesigned data models
+        for improved dashboard efficiency.
+      </div>
+      <div class="impact-green">&#10003; 40% less manual reporting · 30% faster SQL</div>
+      <div class="project-stack">
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">Power BI</span>
+        <span class="stack-tag">Data Modeling</span>
+        <span class="stack-tag">Automation</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📧</div>
+      <div class="project-title">SMS/Email Spam Detection — NLP</div>
+      <div class="project-desc">
+        Built a text classification model using Naive Bayes with NLP
+        preprocessing — tokenization, stop word removal, TF-IDF
+        vectorization. High accuracy distinguishing spam from
+        legitimate messages.
+      </div>
+      <!-- Semantic amber — academic, in-progress category -->
+      <div class="impact-amber">&#9711; Academic ML project — Final year SJCE</div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Naive Bayes</span>
+        <span class="stack-tag">NLP</span>
+        <span class="stack-tag">scikit-learn</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ════════════════════════════════════════════════ -->
+<section class="section light" id="experience">
+  <div class="section-eyebrow">Career</div>
+  <div class="section-title">Where I've worked</div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-date">Jan 2025 — Present<br>Bengaluru, India</div>
+        <div class="timeline-company">WyzMindz Solutions</div>
+      </div>
+      <div class="timeline-right">
+        <div class="timeline-role">Business Analyst — CRM, RPA &amp; Data</div>
+        <div class="timeline-desc">
+          Primary BA for AutoSherpa CRM, a SaaS platform serving authorized
+          automotive dealers across India. I lead a team of 3–4 analysts,
+          own client onboarding end-to-end, deliver product demos, and build
+          data solutions — RPA workflows, Power BI dashboards, ETL pipelines,
+          and forecasting models. Clients span Hyundai, Tata, Maruti, Mahindra,
+          KIA, Volkswagen, and Skoda dealerships.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">Business Analysis</span>
+          <span class="tag">RPA</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">ETL</span>
+          <span class="tag">n8n</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">Forecasting</span>
+          <span class="tag">Team Lead</span>
+          <span class="tag">UAT</span>
+          <span class="tag">BRD / FRD</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-date">Aug 2024 — Jan 2025<br>Chennai, India</div>
+        <div class="timeline-company">DataPrompt International</div>
+      </div>
+      <div class="timeline-right">
+        <div class="timeline-role">Trainee Data Analyst — Data Processing</div>
+        <div class="timeline-desc">
+          Processed large-scale market research data for US-based healthcare
+          and consumer research clients using WinCross, SPSS, Quantum, and
+          Excel. Improved data quality by 20% through structured validation
+          and reduced analysis turnaround by 25% using Excel automation.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">Data Processing</span>
+          <span class="tag">WinCross</span>
+          <span class="tag">SPSS</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Data Validation</span>
+          <span class="tag">US Healthcare Data</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-date">2020 — 2024<br>Chennai, India</div>
+        <div class="timeline-company">St. Joseph's College</div>
+      </div>
+      <div class="timeline-right">
+        <div class="timeline-role">B.E. Mechanical Engineering — CGPA 8.03</div>
+        <div class="timeline-desc">
+          Graduated with a strong academic record. Final year project in
+          machine learning — SMS/Email Spam Detection using Naive Bayes.
+          Completed certifications in Data Science (LIVEWIRE), Data Analytics
+          (Accenture Forage), and Data Visualisation (TATA Group Forage)
+          alongside the degree.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">CGPA 8.03</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Python</span>
+          <span class="tag">Data Science Certified</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SKILLS — Qualitative / Categorical Color Grade ════════════
+     5 distinct muted hues, equal visual weight.
+     No single color looks more important than another.
+     Max 5 categories. AI Tools = neutral (unordered, no category).
+════════════════════════════════════════════════════════════════ -->
+<section class="section light" id="skills" style="padding-top:0">
+  <div class="section-eyebrow">Capabilities</div>
+  <div class="section-title">Skills &amp; expertise</div>
+  <div class="skills-layout">
+    <div>
+      <!-- Cat-1: slate-blue — Analytics & BI -->
+      <div class="skill-group">
+        <div class="skill-group-title" style="color:var(--cat-1)">Analytics &amp; BI</div>
+        <div class="skill-pills">
+          <span class="pill-cat1">Power BI</span>
+          <span class="pill-cat1">SQL</span>
+          <span class="pill-cat1">MySQL</span>
+          <span class="pill-cat1">DAX</span>
+          <span class="pill-cat1">Dashboard Development</span>
+          <span class="pill-cat1">KPI Reporting</span>
+          <span class="pill-cat1">Data Visualization</span>
+          <span class="pill-cat1">Power Query</span>
+          <span class="pill-cat1">Advanced Excel</span>
+        </div>
+      </div>
+      <!-- Cat-2: deep teal — ETL & Automation -->
+      <div class="skill-group">
+        <div class="skill-group-title" style="color:var(--cat-2)">ETL &amp; Automation</div>
+        <div class="skill-pills">
+          <span class="pill-cat2">ETL Pipelines</span>
+          <span class="pill-cat2">RPA</span>
+          <span class="pill-cat2">n8n Automation</span>
+          <span class="pill-cat2">Data Validation</span>
+          <span class="pill-cat2">Data Integration</span>
+          <span class="pill-cat2">Azure Data Factory</span>
+        </div>
+      </div>
+      <!-- Cat-3: soft plum — Programming -->
+      <div class="skill-group">
+        <div class="skill-group-title" style="color:var(--cat-3)">Programming &amp; Data</div>
+        <div class="skill-pills">
+          <span class="pill-cat3">Python</span>
+          <span class="pill-cat3">pandas</span>
+          <span class="pill-cat3">MongoDB</span>
+          <span class="pill-cat3">Flask</span>
+          <span class="pill-cat3">Selenium</span>
+          <span class="pill-cat3">Google Sheets API</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- Cat-4: warm amber — Business Analysis -->
+      <div class="skill-group">
+        <div class="skill-group-title" style="color:var(--cat-4)">Business Analysis</div>
+        <div class="skill-pills">
+          <span class="pill-cat4">Requirements Gathering</span>
+          <span class="pill-cat4">BRD / FRD</span>
+          <span class="pill-cat4">UAT</span>
+          <span class="pill-cat4">User Stories</span>
+          <span class="pill-cat4">Stakeholder Management</span>
+          <span class="pill-cat4">Gap Analysis</span>
+          <span class="pill-cat4">Process Mapping</span>
+          <span class="pill-cat4">Change Management</span>
+        </div>
+      </div>
+      <!-- Cat-5: steel-blue — Methods & Process -->
+      <div class="skill-group">
+        <div class="skill-group-title" style="color:var(--cat-5)">Methods &amp; Process</div>
+        <div class="skill-pills">
+          <span class="pill-cat5">Agile / Scrum</span>
+          <span class="pill-cat5">SDLC</span>
+          <span class="pill-cat5">JIRA</span>
+          <span class="pill-cat5">OpenProject</span>
+          <span class="pill-cat5">CRM Configuration</span>
+          <span class="pill-cat5">Client Onboarding</span>
+          <span class="pill-cat5">Product Demo</span>
+        </div>
+      </div>
+      <!-- Neutral — AI Tools (no category, no color needed) -->
+      <div class="skill-group">
+        <div class="skill-group-title">AI Tools</div>
+        <div class="skill-pills">
+          <span class="pill-neutral">ChatGPT</span>
+          <span class="pill-neutral">Claude</span>
+          <span class="pill-neutral">Cursor IDE</span>
+          <span class="pill-neutral">GitHub Copilot</span>
+          <span class="pill-neutral">Gemini</span>
+          <span class="pill-neutral">Postman AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLIENTS ════════════════════════════════════════════════════ -->
+<section class="section dark">
+  <div class="section-eyebrow">Clients Served</div>
+  <div class="section-title">Automotive brands I've worked with</div>
+  <div class="clients-grid">
+    <div class="client-card">
+      <div class="client-logo">Hyundai</div>
+      <div class="client-sub">Multiple dealer clients<br>RPA · CRM · Forecasting</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">Maruti Suzuki</div>
+      <div class="client-sub">Dealer CRM implementation<br>Forecasting · ETL pipelines</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">Mahindra</div>
+      <div class="client-sub">Full CRM onboarding<br>Dashboards · Data validation</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">Tata Motors</div>
+      <div class="client-sub">CRM onboarding<br>Requirement gathering</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">KIA</div>
+      <div class="client-sub">CRM configuration<br>Workflow mapping · UAT</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">Volkswagen</div>
+      <div class="client-sub">CRM implementation<br>UAT &amp; go-live support</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">Skoda</div>
+      <div class="client-sub">CRM onboarding<br>Product demo delivery</div>
+    </div>
+    <div class="client-card"
+         style="background:var(--action-lo);border-color:rgba(67,97,168,.18)">
+      <div class="client-logo" style="color:var(--seq-2)">Multi-brand</div>
+      <div class="client-sub" style="color:var(--seq-2)">
+        BRD · CRM build<br>RPA data extraction
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ════════════════════════════════════════════════════ -->
+<section class="section" id="contact"
+         style="background:var(--surface-dark2)">
+  <div class="contact-wrap">
+    <div class="section-eyebrow" style="text-align:center">Get in touch</div>
+    <div class="section-title"
+         style="color:var(--surface-light);text-align:center;max-width:100%">
+      Open to BA, DA, and BI Analyst roles
+    </div>
+    <p class="contact-desc">
+      Based in Bengaluru, open to relocate to Chennai or Hyderabad.
+      Also open to fully remote roles across India.
+      Let's connect and talk about how I can contribute to your team.
+    </p>
+    <div style="margin-bottom:24px;display:flex;justify-content:center">
+      <a href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view"
+         target="_blank" class="btn-primary">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+        </svg>
+        Download Resume
+      </a>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:vengalraoofficial@gmail.com" class="contact-link">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0
+                   002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        vengalraoofficial@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/vengalraop"
+         target="_blank" class="contact-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0
+                   00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+        linkedin.com/in/vengalraop
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════════ -->
+<footer>
+  <span>© 2026 Vengal Rao P — Business Analyst</span>
+  <span>Bengaluru, India · Open to relocate</span>
+</footer>
+
+<!-- Counter animation -->
+<script>
+(function(){
+  function animateCount(el,target,duration){
+    let s=0,step=target/(duration/16);
+    function tick(){
+      s=Math.min(s+step,target);
+      el.textContent=Math.round(s);
+      if(s<target)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const sec=document.getElementById('metrics');
+  let done=false;
+  new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting&&!done){
+      done=true;
+      document.querySelectorAll('.count').forEach(function(el){
+        animateCount(el,parseInt(el.dataset.target),1500);
+      });
+    }
+  },{threshold:0.3}).observe(sec);
+})();
+</script>
+</body>
+</html>

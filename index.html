@@ -1,454 +1,1065 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Vengal Rao P — Business & Data Analyst</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vengal Rao P — Business Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#152238;
-    --ink-soft:#3c4a63;
-    --paper:#EEF0F2;
-    --paper-raised:#FFFFFF;
-    --gold:#C4881F;
-    --gold-deep:#9C6B14;
-    --line:#D5D9DE;
-    --slate:#66707E;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Times New Roman', Times, serif;
-    font-size:17px;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  .mono{font-family:'Times New Roman', Times, serif;}
-  a{color:inherit;}
+/*
+  COLOR SYSTEM — based on 60-30-10 + 4 functional data color grades
+  ─────────────────────────────────────────────────────────────────
+  60% DOMINANT SURFACE:  #F8F9FA (light) / #1A2332 (dark hero)
+  30% STRUCTURE & TYPE:  #212529 charcoal — NOT pure black
+  10% ACTION HUE:        #4361A8 slate-blue — ONLY for links, buttons, CTAs
 
-  .wrap{
-    max-width:1080px;
-    margin:0 auto;
-    padding:0 40px;
-  }
+  Sequential grade  → metric bars: #C5D3F0 → #1A3272 (single blue hue, light→dark)
+  Diverging grade   → impact badges: neutral gray midpoint, #4D8B65 forest green
+  Qualitative grade → skill categories: 5 muted hues, equal visual weight
+  Semantic grade    → project status: #4D8B65 sage green, #C8860A amber, #C94A4A crimson
+*/
 
-  /* ===== NAV ===== */
-  .nav{
-    position:sticky; top:0; z-index:20;
-    background:rgba(238,240,242,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{
-    max-width:1080px; margin:0 auto; padding:18px 40px;
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  .nav-mark{font-weight:600; font-size:15px; letter-spacing:0.01em;}
-  .nav-links{display:flex; gap:28px; font-family:'Times New Roman', Times, serif; font-size:13px; color:var(--ink-soft);}
-  .nav-links a{text-decoration:none; border-bottom:1px solid transparent; padding-bottom:2px; transition:border-color .15s ease, color .15s ease;}
-  .nav-links a:hover{border-color:var(--gold); color:var(--ink);}
-  .nav-links a:focus-visible, a:focus-visible{outline:2px solid var(--gold-deep); outline-offset:3px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* ── 60% dominant surfaces ── */
+  --surface-light: #F8F9FA;
+  --surface-light2:#EEF1F5;
+  --surface-dark:  #1A2332;
+  --surface-dark2: #0F1923;
 
-  /* ===== HERO ===== */
-  .hero{
-    padding:96px 0 64px;
-    border-bottom:1px solid var(--line);
-    opacity:0; transform:translateY(8px);
-    animation:rise .7s ease forwards;
-  }
-  @keyframes rise{ to{opacity:1; transform:translateY(0);} }
-  @media (prefers-reduced-motion: reduce){
-    .hero{animation:none; opacity:1; transform:none;}
-  }
-  .hero-grid{
-    display:grid; grid-template-columns:1.5fr 1fr; gap:48px; align-items:end;
-  }
-  .eyebrow-label{
-    font-family:'Times New Roman', Times, serif; font-size:13px; color:var(--gold-deep);
-    margin-bottom:18px; display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow-label::before{content:''; width:22px; height:1px; background:var(--gold-deep); display:inline-block;}
-  h1{
-    font-size:clamp(38px, 5vw, 58px);
-    font-weight:700; letter-spacing:-0.01em; line-height:1.06;
-    color:var(--ink);
-  }
-  .hero-role{
-    font-size:19px; color:var(--ink-soft); margin-top:18px; max-width:46ch; line-height:1.6;
-  }
-  .hero-side{
-    font-size:15px; color:var(--slate); border-left:1px solid var(--line); padding-left:24px;
-  }
-  .hero-side p{margin-bottom:10px;}
-  .hero-side .contact-line{display:flex; gap:8px; font-family:'Times New Roman', Times, serif; font-size:13.5px; color:var(--ink-soft);}
-  .hero-side .contact-line + .contact-line{margin-top:8px;}
-  .hero-cta{
-    margin-top:22px; display:flex; gap:14px; flex-wrap:wrap;
-  }
-  .btn{
-    font-family:'Times New Roman', Times, serif; font-size:13px; text-decoration:none;
-    padding:10px 16px; border:1px solid var(--ink); color:var(--ink);
-    transition:background .15s ease, color .15s ease;
-  }
-  .btn:hover{background:var(--ink); color:var(--paper-raised);}
-  .btn.primary{background:var(--gold-deep); border-color:var(--gold-deep); color:#fff;}
-  .btn.primary:hover{background:#7f5710; border-color:#7f5710;}
+  /* ── 30% structure & typography ── */
+  --charcoal:  #212529;   /* main dark text — NOT pure black */
+  --charcoal2: #343A40;   /* secondary text, borders */
+  --charcoal3: #6C757D;   /* tertiary / muted */
+  --charcoal4: #ADB5BD;   /* very muted labels */
+  --border-light: #DEE2E8;
+  --border-dark:  rgba(255,255,255,.08);
 
-  /* ===== STAT STRIP ===== */
-  .stats{
-    display:grid; grid-template-columns:repeat(4,1fr);
-    border-bottom:1px solid var(--line);
-  }
-  .stat{
-    padding:28px 40px; border-left:1px solid var(--line);
-  }
-  .stat:first-child{border-left:none;}
-  .stat .num{font-size:30px; font-weight:700; color:var(--gold-deep);}
-  .stat .desc{font-size:13px; color:var(--slate); margin-top:6px; line-height:1.45;}
+  /* ── 10% action hue — used ONLY for interactive elements ── */
+  --action:    #4361A8;   /* slate-blue — buttons, links, CTAs */
+  --action2:   #364F8E;   /* hover state */
+  --action-lo: rgba(67,97,168,.1);
 
-  /* ===== SECTION SHELL ===== */
-  section{padding:64px 0;}
-  section + section{border-top:1px solid var(--line);}
-  .sec-head{
-    display:grid; grid-template-columns:220px 1fr; gap:32px; margin-bottom:36px;
-  }
-  .sec-head h2{
-    font-size:22px; font-weight:600; letter-spacing:-0.01em;
-  }
-  .sec-head .sec-note{color:var(--slate); font-size:15px; max-width:56ch;}
-  .sec-body{display:grid; grid-template-columns:220px 1fr; gap:32px;}
+  /* ── Sequential color grade (single hue, light→dark) ── */
+  --seq-1: #C5D3F0;   /* lightest — lowest value */
+  --seq-2: #8FA9E0;
+  --seq-3: #5A7FD0;
+  --seq-4: #4361A8;
+  --seq-5: #2C4A8A;
+  --seq-6: #1A3272;   /* darkest — highest value */
 
-  /* ===== ABOUT ===== */
-  .about-text{font-size:16.5px; color:var(--ink-soft); max-width:68ch; line-height:1.75;}
-  .about-text p + p{margin-top:16px;}
+  /* ── Diverging grade (negative → neutral → positive) ── */
+  --div-neg:  #C94A4A;   /* burnt crimson — below target */
+  --div-mid:  #868E96;   /* neutral gray midpoint */
+  --div-pos:  #4D8B65;   /* forest/sage green — above target */
 
-  /* ===== EXPERIENCE ===== */
-  .role{padding-bottom:36px; position:relative;}
-  .role:last-child{padding-bottom:0;}
-  .role-meta{font-family:'Times New Roman', Times, serif; font-size:12.5px; color:var(--slate); line-height:1.7;}
-  .role-title{font-size:18px; font-weight:600; margin-bottom:2px;}
-  .role-org{font-size:14.5px; color:var(--gold-deep); margin-bottom:14px;}
-  .role ul{list-style:none;}
-  .role li{
-    font-size:15px; color:var(--ink-soft); padding-left:16px; position:relative; margin-bottom:9px; line-height:1.55;
-  }
-  .role li::before{content:'—'; position:absolute; left:0; color:var(--slate);}
-  .role li b{color:var(--ink); font-weight:600;}
+  /* ── Qualitative grade (5 muted hues, equal visual weight) ── */
+  --cat-1: #4361A8;   /* slate-blue   — Analytics & BI */
+  --cat-2: #2E7D6E;   /* deep teal    — ETL & Automation */
+  --cat-3: #7B5EA7;   /* soft plum    — Programming */
+  --cat-4: #8B6914;   /* warm amber   — Business Analysis */
+  --cat-5: #2B6587;   /* steel-blue   — Methods & Process */
 
-  /* ===== SKILLS ===== */
-  .skill-group{margin-bottom:22px;}
-  .skill-group:last-child{margin-bottom:0;}
-  .skill-group-label{font-family:'Times New Roman', Times, serif; font-size:12.5px; color:var(--slate); margin-bottom:10px;}
-  .chips{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{
-    font-family:'Times New Roman', Times, serif; font-size:12.5px;
-    border:1px solid var(--line); padding:6px 11px; color:var(--ink-soft);
-    background:var(--paper-raised);
-  }
+  --cat-1-bg: rgba(67,97,168,.09);
+  --cat-2-bg: rgba(46,125,110,.09);
+  --cat-3-bg: rgba(123,94,167,.09);
+  --cat-4-bg: rgba(139,105,20,.09);
+  --cat-5-bg: rgba(43,101,135,.09);
 
-  /* ===== PROJECTS ===== */
-  .project{
-    border:1px solid var(--line); background:var(--paper-raised);
-    padding:26px 28px; margin-bottom:18px;
-  }
-  .project:last-child{margin-bottom:0;}
-  .project-top{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:14px;}
-  .project-name{font-size:17px; font-weight:600;}
-  .project-tag{font-family:'Times New Roman', Times, serif; font-size:12px; color:var(--gold-deep);}
-  .project-flow{display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:14px;}
-  .flow-part .flow-label{font-family:'Times New Roman', Times, serif; font-size:11px; color:var(--slate); margin-bottom:5px;}
-  .flow-part .flow-text{font-size:14px; color:var(--ink-soft); line-height:1.5;}
-  .project-tools{font-family:'Times New Roman', Times, serif; font-size:12px; color:var(--slate); border-top:1px solid var(--line); padding-top:12px;}
+  --cat-1-bd: rgba(67,97,168,.22);
+  --cat-2-bd: rgba(46,125,110,.22);
+  --cat-3-bd: rgba(123,94,167,.22);
+  --cat-4-bd: rgba(139,105,20,.22);
+  --cat-5-bd: rgba(43,101,135,.22);
 
-  /* ===== CERTS ===== */
-  .cert-list{display:grid; gap:12px;}
-  .cert{display:flex; justify-content:space-between; gap:16px; font-size:14.5px; padding:12px 0; border-bottom:1px solid var(--line);}
-  .cert:last-child{border-bottom:none;}
-  .cert-name{color:var(--ink);}
-  .cert-org{font-family:'Times New Roman', Times, serif; font-size:12.5px; color:var(--slate); white-space:nowrap;}
+  /* ── Semantic / Alert grade ── */
+  --sem-green:     #4D8B65;
+  --sem-green-bg:  rgba(77,139,101,.08);
+  --sem-green-bd:  rgba(77,139,101,.22);
+  --sem-amber:     #C8860A;
+  --sem-amber-bg:  rgba(200,134,10,.08);
+  --sem-amber-bd:  rgba(200,134,10,.22);
+  --sem-red:       #C94A4A;
+  --sem-red-bg:    rgba(201,74,74,.08);
+  --sem-red-bd:    rgba(201,74,74,.22);
 
-  /* ===== FOOTER ===== */
-  footer{padding:56px 0 64px;}
-  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:32px; align-items:start;}
-  footer h2{font-size:26px; font-weight:700; margin-bottom:14px; max-width:16ch; line-height:1.2;}
-  footer p{color:var(--ink-soft); max-width:44ch; margin-bottom:22px;}
-  .footer-contacts{font-family:'Times New Roman', Times, serif; font-size:13.5px; color:var(--ink-soft); line-height:2.1;}
-  .footer-contacts a{text-decoration:none; border-bottom:1px solid var(--line);}
-  .footer-bottom{margin-top:48px; padding-top:20px; border-top:1px solid var(--line); font-family:'Times New Roman', Times, serif; font-size:12px; color:var(--slate); display:flex; justify-content:space-between;}
+  /* ── Type scale ── */
+  --fs-xl:  clamp(2.2rem,5vw,4.2rem);
+  --fs-lg:  clamp(1.4rem,2.6vw,2.1rem);
+  --fs-md:  clamp(0.95rem,1.6vw,1.15rem);
+  --fs-base:1rem;
+  --fs-sm:  0.875rem;
+  --fs-xs:  0.75rem;
+  --radius: 10px;
+}
 
-  @media (max-width:760px){
-    .wrap{padding:0 22px;}
-    .nav-inner{padding:16px 22px;}
-    .nav-links{gap:16px;}
-    .hero{padding:64px 0 40px;}
-    .hero-grid{grid-template-columns:1fr; gap:24px;}
-    .hero-side{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:18px;}
-    .stats{grid-template-columns:repeat(2,1fr);}
-    .stat{padding:20px 22px;}
-    .stat:nth-child(3){border-left:none;}
-    .sec-head, .sec-body{grid-template-columns:1fr;}
-    .project-flow{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr;}
-  }
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:var(--fs-base);
+  background:var(--surface-dark2);
+  color:var(--surface-light);
+  line-height:1.65;overflow-x:hidden
+}
+a{color:inherit;text-decoration:none}
+
+/* ── Subtle grid — de-saturated, low-contrast (Step 2: background noise) ── */
+.grid-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(67,97,168,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(67,97,168,.05) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.45) 0%,transparent 100%)
+}
+
+/* ══════════════════ NAV ════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 48px;
+  background:rgba(15,25,35,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-dark)
+}
+.nav-logo{
+  font-family:'DM Sans',sans-serif;
+  font-weight:700;font-size:1.05rem;letter-spacing:-.01em;
+  color:var(--surface-light)
+}
+/* 10% action hue — nav logo accent */
+.nav-logo span{color:var(--action)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  font-size:var(--fs-sm);font-weight:500;
+  color:var(--charcoal4);transition:color .2s
+}
+.nav-links a:hover{color:var(--surface-light)}
+/* 10% action hue — the ONLY button in nav */
+.nav-resume{
+  padding:7px 18px;border-radius:7px;
+  background:var(--action);color:#fff;
+  font-size:var(--fs-sm);font-weight:600;
+  transition:background .2s,transform .15s;
+  display:flex;align-items:center;gap:6px
+}
+.nav-resume:hover{background:var(--action2);transform:translateY(-1px)}
+
+/* ══════════════════ HERO ═══════════════════════════════════ */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 48px 80px;overflow:hidden;
+  background:var(--surface-dark)
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 13px;border-radius:99px;
+  border:1px solid rgba(67,97,168,.3);
+  background:rgba(67,97,168,.07);
+  font-size:var(--fs-xs);font-weight:500;
+  color:var(--seq-2);letter-spacing:.03em;
+  margin-bottom:26px;width:fit-content
+}
+/* Semantic green — "open to work" is a positive status */
+.hero-tag-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--sem-green);animation:blink 2.2s infinite
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.hero h1{
+  font-family:'DM Sans',sans-serif;
+  font-size:var(--fs-xl);font-weight:700;
+  line-height:1.1;letter-spacing:-.03em;
+  /* 30% charcoal on white would be ink; here inverted = surface-light */
+  color:var(--surface-light);
+  max-width:800px;margin-bottom:22px
+}
+.hero-sub{
+  font-size:var(--fs-md);font-weight:300;
+  color:var(--charcoal4);max-width:540px;
+  line-height:1.72;margin-bottom:40px
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+/* 10% action hue — primary CTA */
+.btn-primary{
+  padding:11px 24px;border-radius:8px;
+  background:var(--action);color:#fff;
+  font-size:var(--fs-sm);font-weight:600;
+  border:none;cursor:pointer;
+  transition:background .2s,transform .15s;
+  display:inline-flex;align-items:center;gap:7px
+}
+.btn-primary:hover{background:var(--action2);transform:translateY(-2px)}
+.btn-outline{
+  padding:11px 24px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.15);
+  color:var(--surface-light);
+  font-size:var(--fs-sm);font-weight:500;background:transparent;
+  transition:border-color .2s,background .2s;cursor:pointer
+}
+.btn-outline:hover{
+  border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.05)
+}
+.hero-brands{
+  display:flex;align-items:center;gap:9px;
+  margin-top:52px;flex-wrap:wrap
+}
+.hero-brands-label{
+  font-size:var(--fs-xs);color:var(--charcoal3);
+  font-weight:500;letter-spacing:.03em;white-space:nowrap
+}
+/* Brand chips — de-saturated, background noise (Step 2) */
+.brand-chip{
+  padding:4px 12px;border-radius:99px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  font-size:var(--fs-xs);color:var(--charcoal4)
+}
+
+/* ══════════════════ METRICS (Sequential Grade) ══════════════
+   Single blue hue scaling from lightest (35%) → darkest (95%)
+   Maps continuous performance data — sequential grade #1
+═══════════════════════════════════════════════════════════════ */
+.metrics{
+  background:var(--surface-dark2);
+  border-top:1px solid var(--border-dark);
+  border-bottom:1px solid var(--border-dark);
+  padding:56px 48px;
+  display:grid;grid-template-columns:repeat(4,1fr)
+}
+.metric{
+  padding:0 36px;
+  border-right:1px solid var(--border-dark)
+}
+.metric:first-child{padding-left:0}
+.metric:last-child{border-right:none}
+
+/* Sequential bar behind number */
+.metric-bar-wrap{
+  height:4px;background:var(--charcoal2);
+  border-radius:99px;margin-bottom:14px;overflow:hidden
+}
+.metric-bar{
+  height:100%;border-radius:99px;
+  /* Each bar gets inline style for its sequential shade */
+}
+
+.metric-num{
+  font-family:'DM Sans',sans-serif;
+  font-size:clamp(1.9rem,3.8vw,3rem);
+  font-weight:700;color:var(--surface-light);
+  line-height:1;margin-bottom:7px
+}
+/* Sequential shade on the number itself — higher = darker blue */
+.metric-num.seq-95{color:var(--seq-6)}
+.metric-num.seq-80{color:var(--seq-5)}
+.metric-num.seq-40{color:var(--seq-4)}
+.metric-num.seq-35{color:var(--seq-3)}
+
+.metric-label{
+  font-size:var(--fs-sm);color:var(--charcoal3);
+  font-weight:400;line-height:1.45;max-width:170px
+}
+
+/* ══════════════════ SECTION BASE ═══════════════════════════ */
+.section{padding:88px 48px}
+/* 60% dominant light surface */
+.section.light{background:var(--surface-light);color:var(--charcoal)}
+.section.dark{background:var(--surface-dark)}
+
+/* 10% action hue — section eyebrow label only */
+.section-eyebrow{
+  font-size:var(--fs-xs);font-weight:600;
+  color:var(--action);letter-spacing:.07em;
+  margin-bottom:10px;text-transform:uppercase
+}
+.section.light .section-eyebrow{color:var(--action2)}
+.section-title{
+  font-family:'DM Sans',sans-serif;
+  font-size:var(--fs-lg);font-weight:700;
+  letter-spacing:-.02em;line-height:1.15;
+  margin-bottom:48px;max-width:540px;
+  color:var(--surface-light)
+}
+.section.light .section-title{color:var(--charcoal)}
+
+/* ══════════════════ PROJECTS ═══════════════════════════════ */
+.projects-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px
+}
+.project-card{
+  /* 60% surface with de-saturated border (Step 2) */
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:var(--radius);padding:28px 24px;
+  transition:border-color .25s,transform .22s
+}
+.project-card:hover{
+  border-color:rgba(67,97,168,.38);transform:translateY(-3px)
+}
+.project-icon{
+  width:40px;height:40px;border-radius:8px;
+  background:var(--action-lo);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;margin-bottom:16px
+}
+.project-title{
+  font-family:'DM Sans',sans-serif;
+  font-size:1rem;font-weight:600;
+  color:var(--surface-light);margin-bottom:8px
+}
+.project-desc{
+  font-size:var(--fs-sm);color:var(--charcoal4);
+  line-height:1.65;margin-bottom:14px
+}
+
+/* ──────────────────────────────────────────────────────────
+   SEMANTIC / ALERT GRADE — project impact badges
+   Diverging scale: positive outcomes = forest green #4D8B65
+   Neutral/process = amber #C8860A (in-progress status)
+   No neon, no harsh colors — sophisticated corporate tones
+────────────────────────────────────────────────────────── */
+.impact-green{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 11px;border-radius:6px;
+  background:var(--sem-green-bg);
+  border:1px solid var(--sem-green-bd);
+  font-size:11px;font-weight:600;
+  color:var(--sem-green);margin-bottom:14px
+}
+.impact-amber{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 11px;border-radius:6px;
+  background:var(--sem-amber-bg);
+  border:1px solid var(--sem-amber-bd);
+  font-size:11px;font-weight:600;
+  color:var(--sem-amber);margin-bottom:14px
+}
+.project-stack{display:flex;gap:5px;flex-wrap:wrap}
+/* De-saturated stack tags — background noise (Step 2) */
+.stack-tag{
+  padding:2px 8px;border-radius:4px;font-size:10px;font-weight:500;
+  background:rgba(255,255,255,.05);color:var(--charcoal4)
+}
+
+/* ══════════════════ TIMELINE ═══════════════════════════════ */
+.timeline{max-width:840px}
+.timeline-item{
+  display:grid;grid-template-columns:185px 1fr;
+  gap:0 36px;margin-bottom:52px
+}
+.timeline-item:last-child{margin-bottom:0}
+.timeline-date{
+  font-size:var(--fs-xs);color:var(--charcoal3);
+  font-weight:500;line-height:1.4;margin-bottom:5px;padding-top:4px
+}
+/* 10% action hue — company name (interactive context label) */
+.timeline-company{
+  font-size:var(--fs-sm);font-weight:600;color:var(--action)
+}
+/* De-saturated border (Step 2 — structural element fades back) */
+.timeline-right{
+  border-left:1px solid var(--border-light);padding-left:36px
+}
+.timeline-role{
+  font-family:'DM Sans',sans-serif;
+  font-size:1.08rem;font-weight:600;
+  color:var(--charcoal);margin-bottom:9px
+}
+.timeline-desc{
+  font-size:var(--fs-sm);
+  /* 30% structure color for body text */
+  color:var(--charcoal2);line-height:1.7;margin-bottom:15px
+}
+.timeline-tags{display:flex;gap:6px;flex-wrap:wrap}
+/* Tags match qualitative cat-1 (analytics/BA context) */
+.tag{
+  padding:3px 9px;border-radius:5px;font-size:11px;font-weight:500;
+  background:var(--cat-1-bg);color:var(--cat-1);
+  border:1px solid var(--cat-1-bd)
+}
+
+/* ══════════════════ SKILLS (Qualitative Grade) ══════════════
+   5 distinct muted hues, equal lightness + saturation,
+   no single color accidentally looks "more important"
+   Max 5 categories — no rainbow chaos (Step 3 mapping)
+═══════════════════════════════════════════════════════════════ */
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.skill-group{margin-bottom:30px}
+.skill-group-title{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.9rem;font-weight:600;
+  color:var(--charcoal);margin-bottom:11px;
+  display:flex;align-items:center;gap:10px
+}
+/* De-saturated rule line (Step 2 — background noise fades) */
+.skill-group-title::after{
+  content:'';flex:1;height:1px;background:var(--border-light)
+}
+.skill-pills{display:flex;gap:6px;flex-wrap:wrap}
+
+/* Qualitative cat-1: slate-blue — Analytics & BI */
+.pill-cat1{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:500;background:var(--cat-1-bg);
+  color:var(--cat-1);border:1px solid var(--cat-1-bd)
+}
+/* Qualitative cat-2: deep teal — ETL & Automation */
+.pill-cat2{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:500;background:var(--cat-2-bg);
+  color:var(--cat-2);border:1px solid var(--cat-2-bd)
+}
+/* Qualitative cat-3: soft plum — Programming */
+.pill-cat3{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:500;background:var(--cat-3-bg);
+  color:var(--cat-3);border:1px solid var(--cat-3-bd)
+}
+/* Qualitative cat-4: warm amber — Business Analysis */
+.pill-cat4{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:500;background:var(--cat-4-bg);
+  color:var(--cat-4);border:1px solid var(--cat-4-bd)
+}
+/* Qualitative cat-5: steel-blue — Methods & Process */
+.pill-cat5{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:500;background:var(--cat-5-bg);
+  color:var(--cat-5);border:1px solid var(--cat-5-bd)
+}
+/* Neutral pill — AI Tools (no category color needed) */
+.pill-neutral{
+  padding:4px 12px;border-radius:99px;font-size:var(--fs-xs);
+  font-weight:400;
+  background:var(--surface-light2);
+  color:var(--charcoal2);
+  border:1px solid var(--border-light)
+}
+
+/* ══════════════════ CLIENTS ════════════════════════════════ */
+.clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.client-card{
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--border-dark);
+  border-radius:var(--radius);padding:22px 18px;text-align:center;
+  transition:border-color .2s
+}
+.client-card:hover{border-color:rgba(67,97,168,.28)}
+.client-logo{
+  font-family:'DM Sans',sans-serif;
+  font-size:1.05rem;font-weight:700;
+  color:var(--surface-light);margin-bottom:5px
+}
+.client-sub{
+  font-size:11px;color:var(--charcoal3);
+  font-weight:400;line-height:1.5
+}
+
+/* ══════════════════ CONTACT ════════════════════════════════ */
+.contact-wrap{max-width:580px;margin:0 auto;text-align:center}
+.contact-desc{
+  font-size:var(--fs-sm);color:var(--charcoal4);
+  line-height:1.72;max-width:420px;margin:0 auto 32px
+}
+.contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.contact-link{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:8px;
+  border:1px solid var(--border-dark);
+  font-size:var(--fs-sm);font-weight:500;color:var(--charcoal4);
+  transition:border-color .2s,color .2s
+}
+/* 10% action hue — hover reveals action color */
+.contact-link:hover{border-color:var(--action);color:var(--surface-light)}
+
+/* ══════════════════ FOOTER ═════════════════════════════════ */
+footer{
+  padding:22px 48px;
+  border-top:1px solid var(--border-dark);
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:var(--fs-xs);color:var(--charcoal3)
+}
+
+/* ══════════════════ RESPONSIVE ═════════════════════════════ */
+@media(max-width:900px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .hero,.section{padding-left:20px;padding-right:20px}
+  .metrics{grid-template-columns:repeat(2,1fr);padding:36px 20px;gap:28px}
+  .metric{border-right:none;padding:0;
+    border-bottom:1px solid var(--border-dark);padding-bottom:22px}
+  .metric:nth-child(odd){
+    border-right:1px solid var(--border-dark);padding-right:16px}
+  .metric:nth-last-child(-n+2){border-bottom:none}
+  .projects-grid{grid-template-columns:1fr}
+  .timeline-item{grid-template-columns:1fr;gap:8px}
+  .timeline-right{
+    border-left:none;padding-left:0;
+    border-top:1px solid var(--border-light);padding-top:14px}
+  .clients-grid{grid-template-columns:repeat(2,1fr)}
+  .skills-layout{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:6px;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="nav-mark">Vengal Rao P</div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
+<!-- ══ NAV ════════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">Vengal<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div>
+    <a href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view"
+       target="_blank" class="nav-resume">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+      </svg>
+      Download Resume
+    </a>
   </div>
 </nav>
 
-<div class="wrap">
+<!-- ══ HERO ═══════════════════════════════════════════════════════ -->
+<section class="hero" id="about">
+  <div class="grid-bg"></div>
+  <div class="hero-tag">
+    <span class="hero-tag-dot"></span>
+    Open to BA · DA · BI Analyst roles — Chennai, Bengaluru, Hyderabad, Remote
+  </div>
+  <h1>
+    Business Analyst with 1.6 years<br>
+    delivering measurable impact in<br>
+    CRM, RPA &amp; data analytics
+  </h1>
+  <p class="hero-sub">
+    I build automation pipelines, forecasting models, and BI dashboards
+    for automotive dealer clients across India — translating business
+    requirements into technical outcomes that teams can act on.
+  </p>
+  <div class="hero-actions">
+    <a href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view"
+       target="_blank" class="btn-primary">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+      </svg>
+      Download Resume
+    </a>
+    <a href="https://www.linkedin.com/in/vengalraop"
+       target="_blank" class="btn-outline">View LinkedIn</a>
+  </div>
+  <div class="hero-brands">
+    <span class="hero-brands-label">Worked with</span>
+    <span class="brand-chip">Hyundai</span>
+    <span class="brand-chip">Maruti Suzuki</span>
+    <span class="brand-chip">Mahindra</span>
+    <span class="brand-chip">Tata Motors</span>
+    <span class="brand-chip">KIA</span>
+    <span class="brand-chip">Volkswagen</span>
+    <span class="brand-chip">Skoda</span>
+  </div>
+</section>
 
-  <section class="hero" id="top">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow-label">Business &amp; Data Analyst · Bengaluru</div>
-        <h1>I turn dealership data into decisions.</h1>
-        <p class="hero-role">SQL, ETL pipelines, RPA, and Power BI for automotive CRM systems — plus the client-facing side: onboarding, demos, and leading the team that ships it.</p>
-        <div class="hero-cta">
-          <a class="btn primary" href="mailto:vengalraooffical@gmail.com">Email me</a>
-          <a class="btn" href="https://www.linkedin.com/in/vengalraop/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn" href="tel:+919791154159">Call</a>
-        </div>
-      </div>
-      <div class="hero-side">
-        <p>Currently: Business Analyst at WyzMindz Solutions, working across CRM implementation for automotive dealer groups.</p>
-        <div class="contact-line"><span>◦</span><span>vengalraooffical@gmail.com</span></div>
-        <div class="contact-line"><span>◦</span><span>+91 97911 54159</span></div>
-        <div class="contact-line"><span>◦</span><span>Bengaluru, India</span></div>
-      </div>
+<!-- ══ METRICS — Sequential Color Grade ══════════════════════════
+     Single blue hue. Higher performance = deeper sequential shade.
+     95% → seq-6 darkest. 35% → seq-3 lightest.
+     Bar width = pre-attentive attribute isolation (Step 4).
+════════════════════════════════════════════════════════════════ -->
+<div class="metrics" id="metrics">
+  <div class="metric">
+    <div class="metric-bar-wrap">
+      <div class="metric-bar"
+           style="width:95%;background:var(--seq-6)"></div>
     </div>
-  </section>
-
-  <section class="stats" aria-label="Key results">
-    <div class="stat">
-      <div class="num mono">30%</div>
-      <div class="desc">Improvement in data accuracy through ETL workflow redesign and SQL validation</div>
+    <div class="metric-num seq-95">
+      <span class="count" data-target="95">0</span>%
     </div>
-    <div class="stat">
-      <div class="num mono">40%</div>
-      <div class="desc">Cut in manual reporting time after moving teams onto Power BI dashboards</div>
-    </div>
-    <div class="stat">
-      <div class="num mono">35%</div>
-      <div class="desc">Faster reporting after SQL query optimization across core CRM tables</div>
-    </div>
-    <div class="stat">
-      <div class="num mono">3–4</div>
-      <div class="desc">Analysts led across data validation, dashboards, and CRM configuration</div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="sec-body">
-      <div class="skill-group-label">§ About</div>
-      <div class="about-text">
-        <p>I'm a Business &amp; Data Analyst working at the intersection of CRM systems, data engineering, and client delivery for automotive dealer groups — Ramani Mahindra, Kun Capital, Kun Hyundai, and Advaith Hyundai among them.</p>
-        <p>Day to day, that means writing the SQL that validates a client's data, building the Power BI dashboard their operations team checks every morning, and standing in front of that same client to walk them through it. I also built RPA bots that pull service history and contact records straight out of dealer web portals, so nobody on the team is copying that data by hand anymore.</p>
-        <p>I lead a small team of 3–4 analysts, own onboarding for new dealer clients, and I'm currently building out AZ-900 knowledge to go deeper on the Azure Data Factory side of our ETL work.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience">
-    <div class="sec-head">
-      <h2>Experience</h2>
-      <div class="sec-note">Two roles, one thread: getting messy dealership data into a shape people can act on.</div>
-    </div>
-    <div class="sec-body">
-      <div></div>
-      <div>
-        <div class="role">
-          <div class="role-meta">JAN 2025 — PRESENT · BENGALURU</div>
-          <div class="role-title">Business Analyst — Data, CRM &amp; RPA Implementation</div>
-          <div class="role-org">WyzMindz Solutions</div>
-          <ul>
-            <li><b>Team leadership</b> — run a team of 3–4 analysts across data validation, dashboard builds, and CRM configuration for automotive clients.</li>
-            <li><b>Client onboarding &amp; demos</b> — own onboarding for new dealer accounts end to end, and deliver product demos that turn stakeholder requirements into CRM configuration.</li>
-            <li><b>RPA</b> — built bots that extract service history and contact records from Hyundai and Maruti dealer portals, removing manual data entry from the workflow.</li>
-            <li><b>CRM product work</b> — develop customized reporting inside the CRM and feed client feedback into new feature builds.</li>
-            <li><b>Data quality</b> — 30% gain in data accuracy via ETL redesign and validation scripts; 20% fewer errors from reconciliation checks.</li>
-            <li><b>Performance</b> — 35% faster reporting from SQL optimization; 40% less manual reporting after Power BI rollout.</li>
-            <li><b>UAT</b> — led UAT cycles that cut post-release issues by 40%.</li>
-          </ul>
-        </div>
-        <div class="role">
-          <div class="role-meta">AUG 2024 — JAN 2025 · CHENNAI</div>
-          <div class="role-title">Trainee Data Analyst</div>
-          <div class="role-org">DataPrompt International</div>
-          <ul>
-            <li>Improved data quality by 20% through structured cleaning and validation.</li>
-            <li>Cut analysis turnaround by 25% by automating repetitive steps in Excel.</li>
-            <li>Ran SQL-based analysis to support client reporting requests.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="sec-head">
-      <h2>Skills</h2>
-      <div class="sec-note">Grouped by what I actually use them for, not alphabetized.</div>
-    </div>
-    <div class="sec-body">
-      <div></div>
-      <div>
-        <div class="skill-group">
-          <div class="skill-group-label">ANALYTICS &amp; BI</div>
-          <div class="chips">
-            <span class="chip">SQL</span><span class="chip">Power BI</span><span class="chip">Excel</span><span class="chip">Power Query</span><span class="chip">Data Cleaning</span><span class="chip">KPI Reporting</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-label">ETL &amp; AUTOMATION</div>
-          <div class="chips">
-            <span class="chip">ETL Pipelines</span><span class="chip">Data Validation</span><span class="chip">RPA</span><span class="chip">Azure Data Factory</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-label">DATABASE</div>
-          <div class="chips">
-            <span class="chip">MySQL</span><span class="chip">Query Optimization</span><span class="chip">Joins</span><span class="chip">Stored Procedures</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-label">BUSINESS ANALYSIS</div>
-          <div class="chips">
-            <span class="chip">Requirement Gathering</span><span class="chip">UAT</span><span class="chip">Stakeholder Management</span><span class="chip">BRD Creation</span><span class="chip">User Stories</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-label">CLIENT &amp; TEAM</div>
-          <div class="chips">
-            <span class="chip">Team Leadership</span><span class="chip">Client Onboarding</span><span class="chip">Product Demos</span><span class="chip">CRM Configuration</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-label">AI-ASSISTED WORKFLOW</div>
-          <div class="chips">
-            <span class="chip">ChatGPT</span><span class="chip">Claude</span><span class="chip">Cursor</span><span class="chip">GitHub Copilot</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="sec-head">
-      <h2>Projects</h2>
-      <div class="sec-note">Client work from the last year and a half, in problem → action → result form.</div>
-    </div>
-    <div class="sec-body">
-      <div></div>
-      <div>
-
-        <div class="project">
-          <div class="project-top">
-            <div class="project-name">Ramani Mahindra — CRM implementation</div>
-            <div class="project-tag mono">10K+ records / month</div>
-          </div>
-          <div class="project-flow">
-            <div class="flow-part"><div class="flow-label mono">PROBLEM</div><div class="flow-text">Inconsistent monthly data across dealership branches, no renewal visibility.</div></div>
-            <div class="flow-part"><div class="flow-label mono">ACTION</div><div class="flow-text">Built SQL validation rules and dashboards tracking renewal status in real time.</div></div>
-            <div class="flow-part"><div class="flow-label mono">RESULT</div><div class="flow-text">30% better data consistency, 25% fewer discrepancies.</div></div>
-          </div>
-          <div class="project-tools">Tools — ChatGPT for documentation · Claude for SQL optimization · Cursor for build</div>
-        </div>
-
-        <div class="project">
-          <div class="project-top">
-            <div class="project-name">Kun Capital — Reporting optimization</div>
-            <div class="project-tag mono">40% less manual work</div>
-          </div>
-          <div class="project-flow">
-            <div class="flow-part"><div class="flow-label mono">PROBLEM</div><div class="flow-text">Reports were compiled by hand every cycle, slow and error-prone.</div></div>
-            <div class="flow-part"><div class="flow-label mono">ACTION</div><div class="flow-text">Automated the reporting pipeline and redesigned underlying data models.</div></div>
-            <div class="flow-part"><div class="flow-label mono">RESULT</div><div class="flow-text">40% reduction in manual reporting, 30% faster SQL.</div></div>
-          </div>
-          <div class="project-tools">Tools — ChatGPT · Claude · Cursor for analytics and development</div>
-        </div>
-
-        <div class="project">
-          <div class="project-top">
-            <div class="project-name">Kun Hyundai &amp; Advaith Hyundai — Workflow optimization</div>
-            <div class="project-tag mono">100% UAT coverage</div>
-          </div>
-          <div class="project-flow">
-            <div class="flow-part"><div class="flow-label mono">PROBLEM</div><div class="flow-text">Existing dealer workflows were slow, with releases prone to post-deployment issues.</div></div>
-            <div class="flow-part"><div class="flow-label mono">ACTION</div><div class="flow-text">Redesigned core workflows and ran full UAT validation coverage on every release.</div></div>
-            <div class="flow-part"><div class="flow-label mono">RESULT</div><div class="flow-text">20% efficiency gain, 30% fewer deployment issues.</div></div>
-          </div>
-          <div class="project-tools">Tools — ChatGPT for test cases and documentation</div>
-        </div>
-
-        <div class="project">
-          <div class="project-top">
-            <div class="project-name">Dealer Portal RPA — Service history &amp; contact extraction</div>
-            <div class="project-tag mono">Hyundai · Maruti</div>
-          </div>
-          <div class="project-flow">
-            <div class="flow-part"><div class="flow-label mono">PROBLEM</div><div class="flow-text">Service history and customer contact data lived only inside Hyundai and Maruti dealer web portals, entered by hand.</div></div>
-            <div class="flow-part"><div class="flow-label mono">ACTION</div><div class="flow-text">Designed and deployed RPA bots that log in, extract the records, and feed them directly into CRM.</div></div>
-            <div class="flow-part"><div class="flow-label mono">RESULT</div><div class="flow-text">Manual data entry removed entirely; records now sync automatically into CRM.</div></div>
-          </div>
-          <div class="project-tools">Tools — RPA bots · CRM API integration</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="certifications">
-    <div class="sec-head">
-      <h2>Certifications &amp; education</h2>
-      <div class="sec-note">B.E. Mechanical Engineering, St. Joseph's College of Engineering — CGPA 8.03</div>
-    </div>
-    <div class="sec-body">
-      <div></div>
-      <div class="cert-list">
-        <div class="cert"><span class="cert-name">Master Program in Data Science</span><span class="cert-org mono">LIVEWIRE</span></div>
-        <div class="cert"><span class="cert-name">Data Analytics &amp; Visualization Job Simulation</span><span class="cert-org mono">ACCENTURE (FORAGE)</span></div>
-        <div class="cert"><span class="cert-name">Data Visualisation: Empowering Business with Effective Insights</span><span class="cert-org mono">TATA GROUP (FORAGE)</span></div>
-        <div class="cert"><span class="cert-name">Microsoft Azure Fundamentals (AZ-900)</span><span class="cert-org mono">IN PROGRESS</span></div>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<footer id="contact">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <h2>Let's talk about your data.</h2>
-        <p>Open to Business Analyst, Data Analyst, and Data Engineer roles in Bengaluru, Chennai, or Hyderabad — remote or hybrid. Available to join in 3 months.</p>
-        <a class="btn primary" href="mailto:vengalraooffical@gmail.com">vengalraooffical@gmail.com</a>
-      </div>
-      <div class="footer-contacts">
-        <div>Phone — <a href="tel:+919791154159">+91 97911 54159</a></div>
-        <div>LinkedIn — <a href="https://www.linkedin.com/in/vengalraop/" target="_blank" rel="noopener">linkedin.com/in/vengalraop</a></div>
-        <div>Location — Bengaluru, India</div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>Vengal Rao P</span>
-      <span>Business &amp; Data Analyst</span>
+    <div class="metric-label">
+      Forecast accuracy — improved from 50% for service &amp;
+      insurance prediction
     </div>
   </div>
+  <div class="metric">
+    <div class="metric-bar-wrap">
+      <div class="metric-bar"
+           style="width:80%;background:var(--seq-5)"></div>
+    </div>
+    <div class="metric-num seq-80">
+      <span class="count" data-target="80">0</span>%
+    </div>
+    <div class="metric-label">
+      Reduction in manual forecasting effort through automation
+    </div>
+  </div>
+  <div class="metric">
+    <div class="metric-bar-wrap">
+      <div class="metric-bar"
+           style="width:40%;background:var(--seq-4)"></div>
+    </div>
+    <div class="metric-num seq-40">
+      <span class="count" data-target="40">0</span>%
+    </div>
+    <div class="metric-label">
+      Less manual reporting via Power BI dashboard automation
+    </div>
+  </div>
+  <div class="metric">
+    <div class="metric-bar-wrap">
+      <div class="metric-bar"
+           style="width:35%;background:var(--seq-3)"></div>
+    </div>
+    <div class="metric-num seq-35">
+      <span class="count" data-target="35">0</span>%
+    </div>
+    <div class="metric-label">
+      Faster SQL query performance after optimization
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROJECTS — Semantic / Alert Grade on badges ═══════════════
+     Positive outcomes → forest green #4D8B65
+     Process / coverage → amber #C8860A
+     No neon. Sophisticated corporate tones only.
+════════════════════════════════════════════════════════════════ -->
+<section class="section dark" id="projects">
+  <div class="section-eyebrow">Selected Work</div>
+  <div class="section-title">Projects that delivered measurable impact</div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-icon">🤖</div>
+      <div class="project-title">RPA Data Extraction Pipeline</div>
+      <div class="project-desc">
+        Built end-to-end RPA workflows to automatically extract service
+        history records and customer contact data from OEM automotive
+        dealer portals. Integrated directly into AutoSherpa CRM,
+        eliminating all manual data entry.
+      </div>
+      <!-- Semantic green — positive outcome confirmed -->
+      <div class="impact-green">&#10003; 50% reduction in data collection time</div>
+      <div class="project-stack">
+        <span class="stack-tag">RPA</span>
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">MySQL</span>
+        <span class="stack-tag">ETL</span>
+        <span class="stack-tag">CRM Integration</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📈</div>
+      <div class="project-title">Service &amp; Insurance Forecasting Model</div>
+      <div class="project-desc">
+        Developed predictive forecasting solutions for automotive dealer
+        clients. Rebuilt the validation framework and business rules from
+        scratch using SQL-based analysis and dealer-specific data patterns.
+      </div>
+      <!-- Semantic green — highest positive outcome -->
+      <div class="impact-green">&#10003; 50% → 95% accuracy · 80% less manual effort</div>
+      <div class="project-stack">
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">MySQL</span>
+        <span class="stack-tag">Data Modeling</span>
+        <span class="stack-tag">Business Rules</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📊</div>
+      <div class="project-title">Mahindra Dealer — CRM Implementation</div>
+      <div class="project-desc">
+        Full CRM implementation for a major Mahindra dealership client.
+        Processed 10,000+ records per month. Built renewal tracking
+        dashboards and reduced data discrepancies by 25% using
+        SQL-based validation scripts.
+      </div>
+      <div class="impact-green">&#10003; 30% improvement in data consistency</div>
+      <div class="project-stack">
+        <span class="stack-tag">Power BI</span>
+        <span class="stack-tag">MySQL</span>
+        <span class="stack-tag">CRM</span>
+        <span class="stack-tag">BRD</span>
+        <span class="stack-tag">UAT</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">⚡</div>
+      <div class="project-title">Hyundai Dealer — Workflow Optimization + RPA</div>
+      <div class="project-desc">
+        Led workflow optimization and RPA deployment for multiple Hyundai
+        dealership clients. Achieved 100% UAT validation coverage using
+        SQL. Reduced deployment issues by 30% through rigorous
+        pre-release testing.
+      </div>
+      <!-- Semantic amber — process/coverage metric, not a % improvement -->
+      <div class="impact-amber">&#9711; 100% UAT coverage · 20% efficiency gain</div>
+      <div class="project-stack">
+        <span class="stack-tag">RPA</span>
+        <span class="stack-tag">UAT</span>
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">n8n</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📉</div>
+      <div class="project-title">Dealer Group — Reporting Optimization</div>
+      <div class="project-desc">
+        Optimized end-to-end reporting pipeline for a large automotive
+        dealer group. Reduced manual reporting by 40% via automation.
+        Improved SQL performance by 30% and redesigned data models
+        for improved dashboard efficiency.
+      </div>
+      <div class="impact-green">&#10003; 40% less manual reporting · 30% faster SQL</div>
+      <div class="project-stack">
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">Power BI</span>
+        <span class="stack-tag">Data Modeling</span>
+        <span class="stack-tag">Automation</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📧</div>
+      <div class="project-title">SMS/Email Spam Detection — NLP</div>
+      <div class="project-desc">
+        Built a text classification model using Naive Bayes with NLP
+        preprocessing — tokenization, stop word removal, TF-IDF
+        vectorization. High accuracy distinguishing spam from
+        legitimate messages.
+      </div>
+      <!-- Semantic amber — academic, in-progress category -->
+      <div class="impact-amber">&#9711; Academic ML project — Final year SJCE</div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Naive Bayes</span>
+        <span class="stack-tag">NLP</span>
+        <span class="stack-tag">scikit-learn</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ════════════════════════════════════════════════ -->
+<section class="section light" id="experience">
+  <div class="section-eyebrow">Career</div>
+  <div class="section-title">Where I've worked</div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-date">Jan 2025 — Present<br>Bengaluru, India</div>
+        <div class="timeline-company">WyzMindz Solutions</div>
+      </div>
+      <div class="timeline-right">
+        <div class="timeline-role">Business Analyst — CRM, RPA &amp; Data</div>
+        <div class="timeline-desc">
+          Primary BA for AutoSherpa CRM, a SaaS platform serving authorized
+          automotive dealers across India. I lead a team of 3–4 analysts,
+          own client onboarding end-to-end, deliver product demos, and build
+          data solutions — RPA workflows, Power BI dashboards, ETL pipelines,
+          and forecasting models. Clients span Hyundai, Tata, Maruti, Mahindra,
+          KIA, Volkswagen, and Skoda dealerships.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">Business Analysis</span>
+          <span class="tag">RPA</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">ETL</span>
+          <span class="tag">n8n</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">Forecasting</span>
+          <span class="tag">Team Lead</span>
+          <span class="tag">UAT</span>
+          <span class="tag">BRD / FRD</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-date">Aug 2024 — Jan 2025<br>Chennai, India</div>
+        <div class="timeline-company">DataPrompt International</div>
+      </div>
+      <div class="timeline-right">
+        <div class="timeline-role">Trainee Data Analyst — Data Processing</div>
+        <div class="timeline-desc">
+          Processed large-scale market research data for US-based healthcare
+          and consumer research clients using WinCross, SPSS, Quantum, and
+          Excel. Improved data quality by 20% through structured validation
+          and reduced analysis turnaround by 25% using Excel automation.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">Data Processing</span>
+          <span class="tag">WinCross</span>
+          <span class="tag">SPSS</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Data Validation</span>
+          <span class="tag">US Healthcare Data</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-left">
+        <div class="timeline-date">2020 — 2024<br>Chennai, India</div>
+        <div class="timeline-company">St. Joseph's College</div>
+      </div>
+      <div class="timeline-right">
+        <div class="timeline-role">B.E. Mechanical Engineering — CGPA 8.03</div>
+        <div class="timeline-desc">
+          Graduated with a strong academic record. Final year project in
+          machine learning — SMS/Email Spam Detection using Naive Bayes.
+          Completed certifications in Data Science (LIVEWIRE), Data Analytics
+          (Accenture Forage), and Data Visualisation (TATA Group Forage)
+          alongside the degree.
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">CGPA 8.03</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Python</span>
+          <span class="tag">Data Science Certified</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SKILLS — Qualitative / Categorical Color Grade ════════════
+     5 distinct muted hues, equal visual weight.
+     No single color looks more important than another.
+     Max 5 categories. AI Tools = neutral (unordered, no category).
+════════════════════════════════════════════════════════════════ -->
+<section class="section light" id="skills" style="padding-top:0">
+  <div class="section-eyebrow">Capabilities</div>
+  <div class="section-title">Skills &amp; expertise</div>
+  <div class="skills-layout">
+    <div>
+      <!-- Cat-1: slate-blue — Analytics & BI -->
+      <div class="skill-group">
+        <div class="skill-group-title" style="color:var(--cat-1)">Analytics &amp; BI</div>
+        <div class="skill-pills">
+          <span class="pill-cat1">Power BI</span>
+          <span class="pill-cat1">SQL</span>
+          <span class="pill-cat1">MySQL</span>
+          <span class="pill-cat1">DAX</span>
+          <span class="pill-cat1">Dashboard Development</span>
+          <span class="pill-cat1">KPI Reporting</span>
+          <span class="pill-cat1">Data Visualization</span>
+          <span class="pill-cat1">Power Query</span>
+          <span class="pill-cat1">Advanced Excel</span>
+        </div>
+      </div>
+      <!-- Cat-2: deep teal — ETL & Automation -->
+      <div class="skill-group">
+        <div class="skill-group-title" style="color:var(--cat-2)">ETL &amp; Automation</div>
+        <div class="skill-pills">
+          <span class="pill-cat2">ETL Pipelines</span>
+          <span class="pill-cat2">RPA</span>
+          <span class="pill-cat2">n8n Automation</span>
+          <span class="pill-cat2">Data Validation</span>
+          <span class="pill-cat2">Data Integration</span>
+          <span class="pill-cat2">Azure Data Factory</span>
+        </div>
+      </div>
+      <!-- Cat-3: soft plum — Programming -->
+      <div class="skill-group">
+        <div class="skill-group-title" style="color:var(--cat-3)">Programming &amp; Data</div>
+        <div class="skill-pills">
+          <span class="pill-cat3">Python</span>
+          <span class="pill-cat3">pandas</span>
+          <span class="pill-cat3">MongoDB</span>
+          <span class="pill-cat3">Flask</span>
+          <span class="pill-cat3">Selenium</span>
+          <span class="pill-cat3">Google Sheets API</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- Cat-4: warm amber — Business Analysis -->
+      <div class="skill-group">
+        <div class="skill-group-title" style="color:var(--cat-4)">Business Analysis</div>
+        <div class="skill-pills">
+          <span class="pill-cat4">Requirements Gathering</span>
+          <span class="pill-cat4">BRD / FRD</span>
+          <span class="pill-cat4">UAT</span>
+          <span class="pill-cat4">User Stories</span>
+          <span class="pill-cat4">Stakeholder Management</span>
+          <span class="pill-cat4">Gap Analysis</span>
+          <span class="pill-cat4">Process Mapping</span>
+          <span class="pill-cat4">Change Management</span>
+        </div>
+      </div>
+      <!-- Cat-5: steel-blue — Methods & Process -->
+      <div class="skill-group">
+        <div class="skill-group-title" style="color:var(--cat-5)">Methods &amp; Process</div>
+        <div class="skill-pills">
+          <span class="pill-cat5">Agile / Scrum</span>
+          <span class="pill-cat5">SDLC</span>
+          <span class="pill-cat5">JIRA</span>
+          <span class="pill-cat5">OpenProject</span>
+          <span class="pill-cat5">CRM Configuration</span>
+          <span class="pill-cat5">Client Onboarding</span>
+          <span class="pill-cat5">Product Demo</span>
+        </div>
+      </div>
+      <!-- Neutral — AI Tools (no category, no color needed) -->
+      <div class="skill-group">
+        <div class="skill-group-title">AI Tools</div>
+        <div class="skill-pills">
+          <span class="pill-neutral">ChatGPT</span>
+          <span class="pill-neutral">Claude</span>
+          <span class="pill-neutral">Cursor IDE</span>
+          <span class="pill-neutral">GitHub Copilot</span>
+          <span class="pill-neutral">Gemini</span>
+          <span class="pill-neutral">Postman AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLIENTS ════════════════════════════════════════════════════ -->
+<section class="section dark">
+  <div class="section-eyebrow">Clients Served</div>
+  <div class="section-title">Automotive brands I've worked with</div>
+  <div class="clients-grid">
+    <div class="client-card">
+      <div class="client-logo">Hyundai</div>
+      <div class="client-sub">Multiple dealer clients<br>RPA · CRM · Forecasting</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">Maruti Suzuki</div>
+      <div class="client-sub">Dealer CRM implementation<br>Forecasting · ETL pipelines</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">Mahindra</div>
+      <div class="client-sub">Full CRM onboarding<br>Dashboards · Data validation</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">Tata Motors</div>
+      <div class="client-sub">CRM onboarding<br>Requirement gathering</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">KIA</div>
+      <div class="client-sub">CRM configuration<br>Workflow mapping · UAT</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">Volkswagen</div>
+      <div class="client-sub">CRM implementation<br>UAT &amp; go-live support</div>
+    </div>
+    <div class="client-card">
+      <div class="client-logo">Skoda</div>
+      <div class="client-sub">CRM onboarding<br>Product demo delivery</div>
+    </div>
+    <div class="client-card"
+         style="background:var(--action-lo);border-color:rgba(67,97,168,.18)">
+      <div class="client-logo" style="color:var(--seq-2)">Multi-brand</div>
+      <div class="client-sub" style="color:var(--seq-2)">
+        BRD · CRM build<br>RPA data extraction
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ════════════════════════════════════════════════════ -->
+<section class="section" id="contact"
+         style="background:var(--surface-dark2)">
+  <div class="contact-wrap">
+    <div class="section-eyebrow" style="text-align:center">Get in touch</div>
+    <div class="section-title"
+         style="color:var(--surface-light);text-align:center;max-width:100%">
+      Open to BA, DA, and BI Analyst roles
+    </div>
+    <p class="contact-desc">
+      Based in Bengaluru, open to relocate to Chennai or Hyderabad.
+      Also open to fully remote roles across India.
+      Let's connect and talk about how I can contribute to your team.
+    </p>
+    <div style="margin-bottom:24px;display:flex;justify-content:center">
+      <a href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view"
+         target="_blank" class="btn-primary">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+        </svg>
+        Download Resume
+      </a>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:vengalraoofficial@gmail.com" class="contact-link">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0
+                   002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        vengalraoofficial@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/vengalraop"
+         target="_blank" class="contact-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0
+                   00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+        linkedin.com/in/vengalraop
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════════ -->
+<footer>
+  <span>© 2026 Vengal Rao P — Business Analyst</span>
+  <span>Bengaluru, India · Open to relocate</span>
 </footer>
 
+<!-- Counter animation -->
+<script>
+(function(){
+  function animateCount(el,target,duration){
+    let s=0,step=target/(duration/16);
+    function tick(){
+      s=Math.min(s+step,target);
+      el.textContent=Math.round(s);
+      if(s<target)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const sec=document.getElementById('metrics');
+  let done=false;
+  new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting&&!done){
+      done=true;
+      document.querySelectorAll('.count').forEach(function(el){
+        animateCount(el,parseInt(el.dataset.target),1500);
+      });
+    }
+  },{threshold:0.3}).observe(sec);
+})();
+</script>
 </body>
 </html>
